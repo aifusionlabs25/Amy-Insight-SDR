@@ -103,88 +103,87 @@ export async function POST(request: Request) {
 
                         // A. User Follow-up Email
                         const emailBodyHtml = `
-                        <div style="font-family: serif; padding: 20px; line-height: 1.6; color: #111;">
+                        <div style="font-family: sans-serif; padding: 20px; line-height: 1.6; color: #111;">
                             <p style="white-space: pre-line;">${leadData.followUpEmail}</p>
                             <br>
                             <hr style="border: 0; border-top: 1px solid #eee;">
                             <p style="color: #444; font-size: 0.9em;">
-                                <strong>James</strong><br>
-                                Senior Legal Intake Specialist<br>
-                                <span style="color: #EAB308;">Knowles Law Firm & Associates</span><br>
-                                Privileged & Confidential
+                                <strong>Amy</strong><br>
+                                SDR Specialist<br>
+                                <span style="color: #AE0A46;">Insight Public Sector</span><br>
+                                Insight Enterprises
                             </p>
                         </div>
                         `;
 
                         // Using safe verified sender
                         await resend.emails.send({
-                            from: 'James at Knowles Law <noreply@aifusionlabs.app>',
+                            from: 'Amy at Insight Public Sector <noreply@aifusionlabs.app>',
                             to: [recipient, 'aifusionlabs@gmail.com'],
-                            subject: `Case Review: Next Steps`,
+                            subject: `Insight Public Sector: Next Steps`,
                             html: emailBodyHtml
                         });
-                        console.log('✅ [Webhook] Sent "James" email to:', recipient);
+                        console.log('✅ [Webhook] Sent "Amy" email to:', recipient);
 
 
                         // B. Internal Lead Alert
                         const internalBodyHtml = `
                         <div style="font-family: sans-serif; padding: 20px; line-height: 1.5; color: #333; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;">
-                            <div style="border-bottom: 2px solid #EAB308; padding-bottom: 10px; margin-bottom: 15px;">
-                                <h2 style="color: #EAB308; margin: 0;">⚖️ New Case Intake</h2>
+                            <div style="border-bottom: 2px solid #AE0A46; padding-bottom: 10px; margin-bottom: 15px;">
+                                <h2 style="color: #AE0A46; margin: 0;">🚀 New Lead Intake</h2>
                                 <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Conversation ID: ${conversation_id}</p>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                 <div>
-                                    <h3 style="margin-bottom: 10px; color: #111;">👤 Client</h3>
+                                    <h3 style="margin-bottom: 10px; color: #111;">👤 Prospect</h3>
                                     <p style="margin: 5px 0;"><strong>Name:</strong> ${leadData.lead_name}</p>
                                     <p style="margin: 5px 0;"><strong>Email:</strong> ${leadData.lead_email}</p>
                                     <p style="margin: 5px 0;"><strong>Phone:</strong> ${leadData.lead_phone}</p>
                                 </div>
                                 <div>
-                                    <h3 style="margin-bottom: 10px; color: #111;">🚗 Incident</h3>
-                                    <p style="margin: 5px 0;"><strong>Type:</strong> ${leadData.incident_type}</p>
-                                    <p style="margin: 5px 0;"><strong>Date:</strong> ${leadData.incident_date}</p>
-                                    <p style="margin: 5px 0;"><strong>Liability:</strong> ${leadData.liability_assessment}</p>
+                                    <h3 style="margin-bottom: 10px; color: #111;">💼 Inquiry</h3>
+                                    <p style="margin: 5px 0;"><strong>Type:</strong> ${leadData.inquiry_type}</p>
+                                    <p style="margin: 5px 0;"><strong>Status:</strong> ${leadData.qualification_status}</p>
+                                    <p style="margin: 5px 0;"><strong>Current Infra:</strong> ${leadData.current_infrastructure}</p>
                                 </div>
                             </div>
                             
                             <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;">
 
-                            <h3 style="color: #111;">📅 Key Dates</h3>
+                            <h3 style="color: #111;">🔥 Pain Points & Needs</h3>
                             <ul style="background: #eef2ff; padding: 15px 20px; border-radius: 4px; border: 1px solid #c7d2fe;">
-                                ${(leadData.key_dates || []).length > 0 ? (leadData.key_dates || []).map((d: string) => `<li>${d}</li>`).join('') : '<li>No specific dates mentioned</li>'}
+                                ${(leadData.pain_points || []).length > 0 ? (leadData.pain_points || []).map((p: string) => `<li>${p}</li>`).join('') : '<li>No specific pain points mentioned</li>'}
                             </ul>
 
-                            <h3 style="color: #111;">🏥 Injuries & Damages</h3>
+                            <h3 style="color: #111;">💰 Budget & Timeline</h3>
                             <ul style="background: #fff; padding: 15px 20px; border-radius: 4px; border: 1px solid #e5e5e5;">
-                                ${(leadData.injuries || []).map((p: string) => `<li>${p}</li>`).join('')}
+                                <li><strong>Budget:</strong> ${leadData.budget}</li>
+                                <li><strong>Timeline:</strong> ${leadData.timeline}</li>
                             </ul>
-                            <p><strong>Treatment:</strong> ${leadData.medical_treatment}</p>
 
-                            <h3 style="color: #DC2626;">🚩 Risk Factors / Red Flags</h3>
-                            ${(leadData.risk_factors || []).length > 0
+                            <h3 style="color: #DC2626;">🚧 Blockers / Competitors</h3>
+                            ${(leadData.competitors_or_blockers || []).length > 0
                                 ? `<ul style="background: #fee2e2; padding: 15px 20px; border-radius: 4px; border: 1px solid #fecaca; color: #991b1b;">
-                                    ${(leadData.risk_factors || []).map((r: string) => `<li>${r}</li>`).join('')}
+                                    ${(leadData.competitors_or_blockers || []).map((r: string) => `<li>${r}</li>`).join('')}
                                    </ul>`
-                                : `<p style="color: #166534; background: #dcfce7; padding: 10px; border-radius: 4px;">✅ No obvious risk factors detected.</p>`
+                                : `<p style="color: #166534; background: #dcfce7; padding: 10px; border-radius: 4px;">✅ No obvious blockers detected.</p>`
                             }
 
-                            <h3 style="color: #111;">📋 Case Summary</h3>
-                            <div style="background: #f3f4f6; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
-                                ${leadData.case_summary}
-                            </div>
-
+                            <h3 style="color: #111;">📋 Recommended Next Steps</h3>
                             <div style="background: #fffbeb; padding: 20px; border-radius: 6px; border: 2px solid #EAB308;">
-                                <h3 style="margin-top: 0; color: #B45309;">🚀 Attorney Action Plan</h3>
                                 <ul style="margin-bottom: 0;">
-                                    ${(leadData.attorney_action_plan || []).map((step: string) => `<li><strong>${step}</strong></li>`).join('')}
+                                    ${(leadData.recommended_next_steps || []).map((step: string) => `<li><strong>${step}</strong></li>`).join('')}
                                 </ul>
+                            </div>
+                            
+                            <div style="background: #f3f4f6; padding: 15px; border-radius: 4px; margin-top: 20px; margin-bottom: 20px;">
+                                <strong>Agent Action:</strong> ${leadData.amy_action}
                             </div>
 
                             <div style="text-align: center; margin-top: 30px;">
                                 ${tavusRecordingUrl
-                                ? `<a href="${tavusRecordingUrl}" style="background-color: #111; color: #EAB308; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold;">View Intake Recording</a>`
+                                ? `<a href="${tavusRecordingUrl}" style="background-color: #111; color: #AE0A46; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold;">View Conversation</a>`
                                 : `<span>Recording Processing...</span>`
                             }
                             </div>
@@ -192,9 +191,9 @@ export async function POST(request: Request) {
                         `;
 
                         await resend.emails.send({
-                            from: 'Intake System <alerts@aifusionlabs.app>',
+                            from: 'Insight Intake <alerts@aifusionlabs.app>',
                             to: 'aifusionlabs@gmail.com',
-                            subject: `[NEW INTAKE] ${leadData.incident_type} - ${leadData.lead_name}`,
+                            subject: `[NEW LEAD] ${leadData.inquiry_type} - ${leadData.lead_name}`,
                             html: internalBodyHtml
                         });
                         console.log('✅ [Webhook] Sent Internal Alert.');

@@ -46,6 +46,8 @@ export class GoogleSheetsService {
 
             // Standard Columns for Legal Intake
             // Date, Time, ConvID, Name, Email, Phone, Type, Summary, Liability, Risk Factors, Action Plan, Recording
+            // Standard Layout (reused columns)
+            // Date, Time, ConvID, Name, Email, Phone, [InquiryType], [Budget/Timeline], [Status], [Blockers], [NextSteps], Recording
             const row = [
                 new Date().toLocaleDateString(),
                 new Date().toLocaleTimeString(),
@@ -53,11 +55,11 @@ export class GoogleSheetsService {
                 data.lead_name || 'N/A',
                 data.lead_email || 'N/A',
                 data.lead_phone || 'N/A',
-                data.incident_type || 'N/A',
-                data.case_summary || 'N/A',
-                data.liability_assessment || 'N/A',
-                (data.risk_factors || []).join(', '),
-                (data.attorney_action_plan || []).join('; '),
+                data.inquiry_type || 'N/A',
+                `${data.budget || ''} | ${data.timeline || ''}`, // Summary Column
+                data.qualification_status || 'N/A',
+                (data.competitors_or_blockers || []).join(', '),
+                (data.recommended_next_steps || []).join('; '),
                 data.tavus_recording_url || 'N/A'
             ];
 

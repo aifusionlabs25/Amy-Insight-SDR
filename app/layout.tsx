@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "James - Knowles Law Firm",
-  description: "AI Legal Intake Specialist",
+  title: "Insight Public Sector - SDR Agent",
+  description: "AI SDR Specialist",
 };
 
 export default function RootLayout({

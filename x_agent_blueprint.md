@@ -127,6 +127,13 @@ This document serves as the **Master PRD and Standard Operating Procedure** for 
 ### 1. Cartesia TTS Integration (CRITICAL)
 - **Issue**: Sending `layers: { tts: ... }` in the Tavus API payload causes an "Unknown field" error (`{'layers': ['Unknown field.']}`).
 - **Fix**: Do **NOT** send the `layers` object in the API call.
+- **Bolt On 3**: **Email & Logic Templating**
+  - **Purpose**: Defines who the agent is in emails and what data they extract.
+  - **Files**: 
+    - `lib/openai-service.ts`: Update `systemPrompt` (Role, Extraction Fields) and `LeadData` interface.
+    - `app/api/webhook/route.ts`: Update Email HTML (Sender Name, Signature, Subject) and internal alert content.
+    - `lib/google-sheets.ts`: Map new extracted fields to existing sheet columns.
+  - **Action**: Search for "SDR" or "Intake" and replace with new persona domain (e.g. "Recruiter", "Support").
 - **Solution**: Configure the Voice ID and TTS provider directly in the Tavus Persona Dashboard. The API should only pass `persona_id`, `conversational_context`, and other standard fields.
 
 ---

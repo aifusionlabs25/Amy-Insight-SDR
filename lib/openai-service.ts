@@ -2,30 +2,26 @@
 import OpenAI from 'openai';
 import { CONFIG } from './config';
 
-// Interface adapted for Legal Intake - ENHANCED for "Gold Standard"
+// Interface adapted for SDR / IT Solutions - Insight Public Sector
 export interface LeadData {
     lead_name: string;
     lead_email: string;
     lead_phone: string;
 
-    // Case Details
-    incident_date: string;
-    incident_type: string;
-    injuries: string[];
-    medical_treatment: string;
-    insurance_info: string;
-    witnesses: string;
-    police_report: string;
+    // Inquiry Details
+    inquiry_type: string; // e.g., "Cloud Migration", "Cybersecurity", "Hardware Refresh"
+    pain_points: string[]; // e.g., "Current server obsolete", "Ransomware fears"
+    current_infrastructure: string; // e.g., "On-prem Exchange", "AWS Legacy"
 
-    // Rich Intelligence (The "Gold")
-    case_summary: string;
-    liability_assessment: string;
-    risk_factors: string[]; // Potential issues (e.g. delayed treatment, pre-existing conditions)
-    key_dates: string[]; // Any specific dates mentioned (incident, doctor appts, etc.)
+    // Qualification (The "Gold")
+    budget: string;
+    timeline: string;
+    competitors_or_blockers: string[]; // e.g., "Considering CDW", "Budget freeze until Q3"
+    qualification_status: string; // "Hot Lead", "Nurture", "Disqualified"
 
     // Action Planning
-    james_action: string; // What James did/promised
-    attorney_action_plan: string[]; // Specific next steps for the firm (e.g. "Request outcome of MRI")
+    amy_action: string; // What Agent did
+    recommended_next_steps: string[]; // e.g., "Schedule Assessment", "Send Whitepaper"
 
     followUpEmail: string;
 }
@@ -50,48 +46,43 @@ export class OpenAIService {
         if (!transcript) return null;
 
         const systemPrompt = `
-        You are a Senior Legal Intake Analyst for a top-tier Personal Injury Law Firm. Your job is to extract critical case information and formulate a strategic action plan from a client intake conversation.
+        You are 'Amy', a Senior SDR for Insight Public Sector (Insight Enterprises). Your job is to extract IT/Tech needs and qualify public sector/enterprise leads from a conversation.
 
         Analyze the transcript below and extract the key information into a JSON object.
 
         GUIDELINES:
         - **Be precise and fact-based.** Do not infer details not present.
-        - **incident_type**: Classify as "Auto Accident", "Premises Liability", "Medical Malpractice", "Dog Bite", etc.
-        - **injuries**: List specific physical injuries.
-        - **risk_factors**: Identify any red flags or challenges (e.g., "Client waited 2 weeks to see doctor", "No police report filed", "Previous injury to same area").
-        - **key_dates**: Extract ALL dates/times mentioned (Incident date, Date of first treatment, Upcoming appointments).
-        - **attorney_action_plan**: Create a numbered list of concrete next steps for the Case Manager/Attorney (e.g., "Order Police Report from [City]", "Send representation letter to [Insurance Co]", "Schedule follow-up on [Date]").
+        - **inquiry_type**: Classify as "Cloud", "Cybersecurity", "Hardware/Devices", "AI/Data", or "Modern Workforce".
+        - **pain_points**: List specific technical or business challenges.
+        - **current_infrastructure**: What are they using now? (Legacy systems, specific vendors).
+        - **qualification_status**: "Qualified" (Decision maker + Budget/Need), "Nurture" (Research phase), or "Disqualified".
+        - **recommended_next_steps**: Concrete steps for the Account Executive (e.g. "Schedule Tech Check", "Send Quote").
         
-        - **followUpEmail**: Write a warm, empathetic, professional follow-up email body (HTML text, <p>, <br>, <ul> only). 
-          - Address the client by name.
-          - Validating their choice to call ("You did the right thing by reaching out").
-          - Re-state 1-2 key details to show active listening.
-          - Clear next step: "Our Managing Attorney will review this immediately."
-          - Sign off as "James".
+        - **followUpEmail**: Write a professional, concise, outcome-oriented follow-up email body (HTML text, <p>, <br>, <ul> only). 
+          - Address client by name.
+          - Context: "Great chatting about your [Topic] needs."
+          - Value Add: Mention one specific insight or solution relevant to them.
+          - Call to Action: "I'll have our [Topic] Specialist send over some specs."
+          - Sign off as "Amy".
 
         EXAMPLE OUTPUT FORMAT:
         {
-            "lead_name": "Jane Doe",
-            "lead_email": "jane@example.com",
+            "lead_name": "Dave Miller",
+            "lead_email": "dave@citygov.org",
             "lead_phone": "555-0199",
-            "incident_date": "Oct 12th, roughly 2pm",
-            "incident_type": "Auto Accident - Rear End",
-            "injuries": ["Severe whiplash", "Numbness in left hand"],
-            "medical_treatment": "ER immediately after; PCP follow-up scheduled",
-            "insurance_info": "State Farm (Other Driver: Mike Smith)",
-            "witnesses": "One bystander (contact info unknown)",
-            "police_report": "Filed with Phoenix PD",
-            "case_summary": "Client was stopped at red light on Camelback Rd when rear-ended at 40mph. Airbags deployed. Other driver apologized at scene.",
-            "liability_assessment": "Clear Liability (Rear-end collision, admission of fault)",
-            "risk_factors": ["Gap in treatment (missed PCP appt)", "Client unsure if they have UIM coverage"],
-            "key_dates": ["Incident: Oct 12", "ER Visit: Oct 12", "Next Ortho Appt: Nov 1"],
-            "james_action": "Confirmed contact info, advised not to speak to adjusters",
-            "attorney_action_plan": [
-                "Request collision report from Phoenix PD",
-                "Send Letter of Rep to State Farm",
-                "Verify client's UIM coverage limit"
+            "inquiry_type": "Cybersecurity / Endpoint",
+            "pain_points": ["Recent phishing attacks", "Managing remote devices"],
+            "current_infrastructure": "McAfee on-prem, Windows 10",
+            "budget": "Fiscal Year 2026 funds available",
+            "timeline": "Needs solution by Q3",
+            "competitors_or_blockers": ["Looking at Crowdstike directly"],
+            "qualification_status": "Qualified - Hot",
+            "amy_action": "Explained Insight's managed security wrapper",
+            "recommended_next_steps": [
+                "Schedule demo with Security Architect",
+                "Send 'Secure Public Sector' case study"
             ],
-            "followUpEmail": "<p>Hi Jane,</p><p>Thank you for trusting us with your story. I know dealing with the aftermath of a crash is overwhelming.</p><p>I have noted that you are experiencing numbness in your hand—please make sure to mention that to your doctor at your next appointment.</p><p>I have passed your file to our Case Review team. We will be in touch within 24 hours.</p>"
+            "followUpEmail": "<p>Hi Dave,</p><p>Thanks for discussing your endpoint security challenges today. Protecting remote devices is exactly where we're seeing public sector agencies focus right now.</p><p>I have looped in our Security Architect to prepare a comparison for your team.</p><p>Best,<br>Amy</p>"
         }
         `;
 
@@ -124,20 +115,16 @@ export class OpenAIService {
                 lead_name: "Valued Client",
                 lead_email: "aifusionlabs@gmail.com",
                 lead_phone: "Unknown",
-                incident_date: "Unknown",
-                incident_type: "Unknown",
-                injuries: ["Unknown"],
-                medical_treatment: "Unknown",
-                insurance_info: "Unknown",
-                witnesses: "Unknown",
-                police_report: "Unknown",
-                case_summary: "Conversion processing failed or transcript too short.",
-                liability_assessment: "Needs manual review",
-                risk_factors: [],
-                key_dates: [],
-                james_action: "Attempted intake",
-                attorney_action_plan: ["Manual Follow-up Required"],
-                followUpEmail: "<p>Hello,</p><p>Thank you for speaking with Knowles Law Firm. We have received your information and a team member will reach out to you shortly.</p><p>Best regards,<br>James</p>"
+                inquiry_type: "General Inquiry",
+                pain_points: ["Unknown"],
+                current_infrastructure: "Unknown",
+                budget: "Unknown",
+                timeline: "Unknown",
+                competitors_or_blockers: [],
+                qualification_status: "Needs review",
+                amy_action: "Attempted intake",
+                recommended_next_steps: ["Manual Follow-up Required"],
+                followUpEmail: "<p>Hello,</p><p>Thank you for speaking with Insight Public Sector. We have received your query and a specialist will reach out to you shortly.</p><p>Best regards,<br>Amy</p>"
             };
         }
     }
