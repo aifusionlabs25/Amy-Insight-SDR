@@ -58,7 +58,8 @@ body {
   color: rgb(var(--gd-text));
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   /* Default Next.js font or Outfit if ported */
-  background: linear-gradient(135deg, rgb(var(--gd-gold)) 0%, rgb(var(--gd-blue)) 100%);
+  /* Tuned Gradient: More Purple, toned down Fuchsia */
+  background: linear-gradient(135deg, #7a1961 0%, rgb(var(--gd-blue)) 90%);
   overflow-x: hidden;
 }
 

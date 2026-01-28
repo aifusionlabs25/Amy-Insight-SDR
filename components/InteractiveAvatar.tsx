@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo.png" alt="Insight Enterprises" className="h-12 w-auto object-contain" />
+                                <img src="/insight-logo.png" alt="Insight Enterprises" className="h-12 w-auto object-contain brightness-0 invert opacity-90" />
                             </a>
                         </div>
 
@@ -217,7 +217,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                         <button
                                             onClick={startConversation}
                                             disabled={loading}
-                                            className="gd-btn gd-btn-primary px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed text-white"
+                                            className="gd-btn px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10"
                                             type="button"
                                         >
                                             <span>{loading ? 'Connecting...' : 'Speak with Amy'}</span>
