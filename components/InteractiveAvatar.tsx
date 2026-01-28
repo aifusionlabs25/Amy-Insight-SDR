@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo.png" alt="Insight Enterprises" className="h-12 w-auto object-contain brightness-0 invert opacity-90" />
+                                <img src="/insight-logo.png" alt="Insight Enterprises" className="h-12 w-auto object-contain invert mix-blend-screen opacity-90" />
                             </a>
                         </div>
 
@@ -207,7 +207,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                     </div>
 
                                     <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
-                                        Meet <span className="gd-gradient-text font-semibold">Amy</span>
+                                        Meet <span className="text-white font-semibold">Amy</span>
                                     </h1>
                                     <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
                                         Insight Public Sector SDR
