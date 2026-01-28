@@ -132,8 +132,8 @@ export default function AccessGate({ children }: AccessGateProps) {
                 <div className="w-full max-w-md">
                     {/* Logo Area */}
                     <div className="text-center mb-8">
-                        <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="inline-block p-4 mb-2 hover:opacity-80 transition-opacity">
-                            <span className="text-3xl font-serif text-white tracking-widest uppercase border-b-2 border-[#AE0A46] pb-2">Insight</span>
+                        <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="inline-block mb-4 hover:opacity-80 transition-opacity">
+                            <img src="/insight-logo.png" alt="Insight Enterprises" className="h-16 w-auto object-contain mx-auto" />
                         </a>
                         <h1 className="text-xl font-light text-slate-300 mt-2">
                             Amy

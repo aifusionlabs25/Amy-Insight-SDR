@@ -11,26 +11,35 @@
   color-scheme: dark;
 
   /* Base RGB tokens */
-  --gd-text: 248 250 252; /* slate-50 */
-  --gd-muted: 148 163 184; /* slate-400 */
-  --gd-bg0: 2 6 23; /* slate-950 */
-  --gd-bg1: 15 23 42; /* slate-900 */
-  
-  /* Insight Enterprises Brand Colors */
-  --gd-gold: 174 10 70; /* #AE0A46 Shiraz (Red) - using as primary "gold" slot replacement */
-  --gd-gold-dim: 139 8 56; /* Darker Shiraz */
-  
-  --gd-navy: 62 51 45; /* #3E332D Taupe/Dark - using as navy slot replacement */
-  --gd-blue: 212 14 140; /* #D40E8C Red Violet (Magenta) - using as accent */
-  
+  --gd-text: 248 250 252;
+  /* slate-50 */
+  --gd-muted: 148 163 184;
+  /* slate-400 */
+  --gd-bg0: 2 6 23;
+  /* slate-950 */
+  --gd-bg1: 15 23 42;
+  /* slate-900 */
+
+  /* Insight Enterprises Brand Colors (Refined) */
+  /* Main Gradient: #AE0A46 (Red) -> #631D76 (Purple) */
+  --gd-gold: 174 10 70;
+  /* #AE0A46 Shiraz (Red) - Start of gradient */
+  --gd-gold-dim: 139 8 56;
+
+  --gd-navy: 62 51 45;
+  /* #3E332D Taupe/Dark - Backgrounds */
+  --gd-blue: 99 29 118;
+  /* #631D76 Deep Purple - End of gradient */
+
   /* Mapped for compatibility */
-  --gd-emerald: 174 10 70; 
-  --gd-teal: 212 14 140; 
-  
+  --gd-emerald: 174 10 70;
+  --gd-teal: 212 14 140;
+
   --gd-rose: 244 63 94;
   --gd-danger: 220 38 38;
 
-  --gd-radius: 4px; /* More square/formal for legal */
+  --gd-radius: 4px;
+  /* More square/formal for legal */
   --gd-radius-lg: 8px;
 
   --gd-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
@@ -47,10 +56,12 @@ body {
 
 body {
   color: rgb(var(--gd-text));
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; /* Default Next.js font or Outfit if ported */
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Default Next.js font or Outfit if ported */
   background:
     radial-gradient(1200px 800px at 50% -15%, rgba(59, 130, 246, 0.15), transparent 60%),
-    radial-gradient(900px 600px at 0% 0%, rgba(234, 179 8, 0.10), transparent 55%), /* Gold glow */
+    radial-gradient(900px 600px at 0% 0%, rgba(234, 179 8, 0.10), transparent 55%),
+    /* Gold glow */
     linear-gradient(180deg, rgb(var(--gd-bg0)) 0%, #000000 100%);
   overflow-x: hidden;
 }
@@ -76,7 +87,8 @@ body::before {
 }
 
 ::selection {
-  background: rgba(234, 179, 8, 0.25); /* Gold selection */
+  background: rgba(234, 179, 8, 0.25);
+  /* Gold selection */
   color: white;
 }
 
@@ -131,7 +143,8 @@ body::before {
     justify-content: center;
     gap: 10px;
     padding: 10px 20px;
-    border-radius: 4px; /* More formal */
+    border-radius: 4px;
+    /* More formal */
     font-weight: 500;
     border: 1px solid rgba(148, 163, 184, 0.20);
     background: rgba(255, 255, 255, 0.05);
@@ -150,12 +163,14 @@ body::before {
 
   .gd-btn-primary {
     border: 0;
-    background: linear-gradient(90deg, rgba(202, 138, 4, 1), rgba(234, 179, 8, 1)); /* Gold Gradient */
+    background: linear-gradient(90deg, rgba(202, 138, 4, 1), rgba(234, 179, 8, 1));
+    /* Gold Gradient */
     box-shadow: 0 0 20px rgba(234, 179, 8, 0.2);
-    color: black; /* Gold bg needs dark text usually, or keeping white if contrast is ok. Gold 500 is bright. */
+    color: black;
+    /* Gold bg needs dark text usually, or keeping white if contrast is ok. Gold 500 is bright. */
     font-weight: 600;
   }
-  
+
   .gd-btn-primary:hover {
     box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
   }
@@ -167,7 +182,8 @@ body::before {
 
   /* Gradient Text */
   .gd-gradient-text {
-    background: linear-gradient(90deg, #EAB308, #FCD34D); /* Gold to Light Gold */
+    background: linear-gradient(90deg, #EAB308, #FCD34D);
+    /* Gold to Light Gold */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

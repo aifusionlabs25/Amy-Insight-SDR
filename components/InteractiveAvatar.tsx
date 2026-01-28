@@ -154,10 +154,9 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 <header className="fixed left-0 top-0 z-[300] w-full px-6 md:px-10 py-4">
                     <div className="mx-auto flex max-w-7xl items-center justify-between">
                         <div className="flex items-center gap-3 z-[1000] relative">
-                            {/* Text Logo */}
-                            <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col hover:opacity-80 transition-opacity">
-                                <span className="text-xl font-serif tracking-widest uppercase text-white font-bold whitespace-nowrap">Insight</span>
-                                <span className="text-[10px] text-[#AE0A46] tracking-widest uppercase whitespace-nowrap">Enterprises</span>
+                            {/* Image Logo */}
+                            <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                                <img src="/insight-logo.png" alt="Insight Enterprises" className="h-12 w-auto object-contain" />
                             </a>
                         </div>
 
@@ -202,7 +201,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                             <img
                                                 src="/amy.png"
                                                 alt="Amy Headshot"
-                                                className="h-32 w-32 md:h-36 md:w-36 rounded-full object-cover opacity-95"
+                                                className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover opacity-95"
                                             />
                                         </div>
                                     </div>
