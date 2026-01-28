@@ -1,0 +1,66 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: HANDOFF
+DOC_ID: source_log
+VERSION: 1.2
+EFFECTIVE_DATE: 2026-01-27
+TAGS: handoff, sources, traceability, links, amy, insight
+SOURCE_SCOPE: User-provided Insight SDR knowledge pack (derived from Insight.com + ips.insight.com references where noted); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+INSIGHT SDR — SOURCE LOG (AMY)
+
+NOTE
+This demo pack was derived from user-provided material that references Insight web properties.
+Validate/refresh links before presenting externally.
+
+FORMAT
+- SOURCE_ID: Short ID used in notes
+- URL: Public page
+- USED_IN: Which KB files reference it
+
+----------------------------------------------------------------------
+SOURCES (FROM PROVIDED PACK)
+
+SRC-CLOUD-01
+URL: https://www.insight.com/en_US/what-we-do/expertise/cloud.html
+USED_IN: KB seed; Solutions catalog; Proof points (FinOps savings); Partner ecosystem (cloud positioning)
+
+SRC-WORKPLACE-01
+URL: https://www.insight.com/en_US/what-we-do/expertise/modern-workplace.html
+USED_IN: KB seed; Solutions catalog; Proof points (O365 migrations; device scale)
+
+SRC-DATAAI-01
+URL: https://www.insight.com/en_US/what-we-do/expertise/data-and-ai.html
+USED_IN: KB seed; Solutions catalog; Proof points (GenAI outcomes)
+
+SRC-SECURITY-01
+URL: https://www.insight.com/en_US/what-we-do/expertise/security.html
+USED_IN: KB seed; Solutions catalog; Proof points (zero-trust; security outcomes)
+
+SRC-IPS-01
+URL: https://ips.insight.com/en_US/public-sector.html
+USED_IN: Industries & IPS; IPS routing; Proof points (gov modernization)
+
+SRC-IPS-GOV-01
+URL: https://ips.insight.com/en_US/public-sector/government.html
+USED_IN: Proof points (telehealth deployment); IPS routing
+
+SRC-CISCO-01
+URL: https://www.insight.com/en_US/shop/partner/cisco.html
+USED_IN: Partner ecosystem; Proof points (Cisco award)
+
+SRC-HANU-01
+URL: https://investor.insight.com/news-releases/news-release-details/2022/Hanu-an-Insight-Company-Recognized-in-2022-Gartner-Magic-Qu
+USED_IN: Proof points (analyst recognition)
+
+----------------------------------------------------------------------
+OPTIONAL (ADD IF YOU HAVE IT)
+- Careers / Sales Academy pages
+- Partner pages (Microsoft, AWS, Google)
+- Case studies pages
+- Compliance statements (SOC 2, etc.) if publicly documented
+
+END

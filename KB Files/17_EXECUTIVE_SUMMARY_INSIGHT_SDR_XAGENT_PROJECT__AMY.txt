@@ -1,0 +1,68 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: DOC
+DOC_ID: executive_summary
+VERSION: 1.2
+EFFECTIVE_DATE: 2026-01-27
+TAGS: executive-summary, leadership, overview, amy, insight, x-agent
+SOURCE_SCOPE: User-provided Insight SDR knowledge pack (derived from Insight.com + ips.insight.com references where noted); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+EXECUTIVE SUMMARY — AMY (INSIGHT SDR X-AGENT) v1.2
+
+WHAT AMY DOES
+Amy is an SDR-style X-Agent built to run consultative discovery conversations for Insight prospects, qualify opportunities using BANT, and route qualified leads to the correct human specialist (AE / solutions architect / AI specialist / security / IPS).
+
+WHY THIS MATTERS
+- Faster response to inbound leads (24/7 availability)
+- Consistent discovery quality (no fatigue, no variance)
+- Higher-quality meetings (BANT captured + correct routing)
+- Reduced human SDR load (focus humans on high-value conversations)
+
+SCOPE (WHAT’S INCLUDED)
+- System prompt + persona context defining behavior and boundaries
+- 9 KB modules covering:
+  - company + solution pillars
+  - solutions catalog and deal sizing guidance (ranges only)
+  - industries + IPS routing
+  - partner ecosystem language
+  - proof points and credibility anchors
+  - discovery question framework
+  - objections and responses
+  - competitive positioning and differentiation
+  - compliance + privacy guardrails
+- Demo scenarios to validate performance
+- Source log for traceability (links referenced in the provided pack)
+
+WHAT AMY IS NOT
+- Not a closer; does not negotiate contracts
+- Not a pricing authority; does not quote exact fees
+- Not legal/compliance counsel; does not provide audit guidance beyond high-level
+- Not a repository for sensitive data; refuses credentials/PII/PHI
+
+RECOMMENDED PILOT (30 DAYS)
+Week 1: Configure Amy in Tavus; run demo scenarios; refine prompts.
+Week 2: Soft launch on low-risk inbound channels (web form follow-ups).
+Week 3: Expand to higher-volume channels; measure routing accuracy.
+Week 4: Decide scale path; define human handoff workflow.
+
+SUCCESS METRICS
+- BANT completeness: >85% of qualified conversations
+- Correct routing: >90% (AE vs specialist vs IPS)
+- Meeting conversion: at or above human SDR baseline
+- Compliance: zero do-not-contact violations; zero sensitive-data capture
+
+RISKS & MITIGATIONS
+- Risk: Overpromising outcomes
+  - Mitigation: “no guarantees” guardrails + escalation triggers
+- Risk: KB drift (stale stats / awards)
+  - Mitigation: monthly source refresh using source log
+- Risk: Public sector mishandling
+  - Mitigation: immediate IPS routing rule
+
+DECISION
+This pack is ready for demo deployment and controlled pilot. The recommended next step is to run the 4 demo scenarios, then deploy in a limited inbound workflow with measured handoff outcomes.
+
+END

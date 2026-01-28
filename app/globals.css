@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Knowles Law Firm Demo Shell
+   - Tailwind v4 compatible
+   - Premium "Legal Gold & Navy" Theme
+   ========================================================= */
+
+/* ---- Theme tokens ---- */
+:root {
+  color-scheme: dark;
+
+  /* Base RGB tokens */
+  --gd-text: 248 250 252; /* slate-50 */
+  --gd-muted: 148 163 184; /* slate-400 */
+  --gd-bg0: 2 6 23; /* slate-950 */
+  --gd-bg1: 15 23 42; /* slate-900 */
+  
+  /* Insight Enterprises Brand Colors */
+  --gd-gold: 174 10 70; /* #AE0A46 Shiraz (Red) - using as primary "gold" slot replacement */
+  --gd-gold-dim: 139 8 56; /* Darker Shiraz */
+  
+  --gd-navy: 62 51 45; /* #3E332D Taupe/Dark - using as navy slot replacement */
+  --gd-blue: 212 14 140; /* #D40E8C Red Violet (Magenta) - using as accent */
+  
+  /* Mapped for compatibility */
+  --gd-emerald: 174 10 70; 
+  --gd-teal: 212 14 140; 
+  
+  --gd-rose: 244 63 94;
+  --gd-danger: 220 38 38;
+
+  --gd-radius: 4px; /* More square/formal for legal */
+  --gd-radius-lg: 8px;
+
+  --gd-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+  --gd-shadow-soft: 0 18px 55px rgba(0, 0, 0, 0.50);
+
+  --gd-blur: 18px;
+}
+
+/* ---- Base page look ---- */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  color: rgb(var(--gd-text));
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; /* Default Next.js font or Outfit if ported */
+  background:
+    radial-gradient(1200px 800px at 50% -15%, rgba(59, 130, 246, 0.15), transparent 60%),
+    radial-gradient(900px 600px at 0% 0%, rgba(234, 179 8, 0.10), transparent 55%), /* Gold glow */
+    linear-gradient(180deg, rgb(var(--gd-bg0)) 0%, #000000 100%);
+  overflow-x: hidden;
+}
+
+/* Texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* Subtle grid */
+.gd-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 35%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 72%);
+}
+
+::selection {
+  background: rgba(234, 179, 8, 0.25); /* Gold selection */
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(234, 179, 8, 0.65);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- Components ---- */
+@layer components {
+
+  /* Glass surface */
+  .gd-glass {
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: var(--gd-radius-lg);
+    backdrop-filter: blur(var(--gd-blur));
+    box-shadow: var(--gd-shadow-soft);
+  }
+
+  /* Gradient-border stage */
+  .gd-stage {
+    position: relative;
+    border-radius: var(--gd-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--gd-shadow);
+  }
+
+  .gd-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    /* Gold/Blue Gradient Border */
+    background: linear-gradient(135deg,
+        rgba(59, 130, 246, 0.40),
+        rgba(234, 179, 8, 0.40));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Buttons */
+  .gd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 4px; /* More formal */
+    font-weight: 500;
+    border: 1px solid rgba(148, 163, 184, 0.20);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    transition: all 200ms ease;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .gd-btn:hover {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(234, 179, 8, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .gd-btn-primary {
+    border: 0;
+    background: linear-gradient(90deg, rgba(202, 138, 4, 1), rgba(234, 179, 8, 1)); /* Gold Gradient */
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.2);
+    color: black; /* Gold bg needs dark text usually, or keeping white if contrast is ok. Gold 500 is bright. */
+    font-weight: 600;
+  }
+  
+  .gd-btn-primary:hover {
+    box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
+  }
+
+  .gd-btn-danger {
+    border: 0;
+    background: linear-gradient(90deg, rgba(153, 27, 27, 1), rgba(220, 38, 38, 1));
+  }
+
+  /* Gradient Text */
+  .gd-gradient-text {
+    background: linear-gradient(90deg, #EAB308, #FCD34D); /* Gold to Light Gold */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Bagde */
+  .gd-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    background: rgba(2, 6, 23, 0.6);
+    color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

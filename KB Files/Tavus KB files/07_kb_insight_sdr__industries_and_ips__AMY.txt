@@ -1,0 +1,75 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: KB
+DOC_ID: industries_and_ips
+VERSION: 1.1
+EFFECTIVE_DATE: 2026-01-27
+TAGS: kb, industries, verticals, ips, routing, amy, insight
+SOURCE_SCOPE: Insight.com + ips.insight.com (where applicable); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+INSIGHT SDR — INDUSTRIES + IPS ROUTING (FAST)
+
+USE THIS FOR
+- Adding context (“what we see in your industry”)
+- Asking smarter questions
+- Knowing when to route to a vertical specialist (especially IPS)
+
+======================================================================
+HEALTHCARE
+- Typical pains: EHR fragmentation, HIPAA audits, imaging backlogs, interoperability, burnout
+- Best‑fit pillars: Security & Compliance; Cloud; AI & Data
+- Discovery prompts:
+  * “Single EHR or multiple systems?”
+  * “Any HIPAA audit findings recently?”
+  * “Where’s the bottleneck—workflow, security, patient outcomes?”
+- IPS trigger: VA/state hospitals/government healthcare → route to IPS
+
+======================================================================
+RETAIL & E‑COMMERCE
+- Typical pains: omnichannel pressure, legacy POS, cloud cost growth, inventory, personalization
+- Best‑fit pillars: Cloud; AI & Data; Modern Workplace (store tech/device fleet)
+- Discovery prompts:
+  * “How many stores and what’s the store tech strategy?”
+  * “Is cloud spend growing faster than sales?”
+  * “Any plans for GenAI in customer service or personalization?”
+
+======================================================================
+MANUFACTURING & ADVANCED INDUSTRIES
+- Typical pains: downtime, legacy equipment, IoT/edge visibility, supply chain disruptions
+- Best‑fit pillars: AI & Data; Cloud; Security (OT/IT risk)
+- Discovery prompts:
+  * “What does downtime cost you?”
+  * “Are machines connected and producing usable data?”
+  * “Any predictive maintenance initiatives underway?”
+
+======================================================================
+FINANCIAL SERVICES
+- Typical pains: compliance burden, fraud, GenAI security concerns, legacy modernization
+- Best‑fit pillars: Security & Compliance; AI & Data; Cloud
+- Discovery prompts:
+  * “Which frameworks apply (SOC2, PCI, GDPR, etc.)?”
+  * “Any audit findings or near‑miss incidents?”
+  * “Are you exploring AI advisors/chatbots—and what are the security constraints?”
+
+======================================================================
+GOVERNMENT (FED/STATE/LOCAL) — IPS
+- Typical pains: FedRAMP/FISMA, procurement bureaucracy, budget cycles, legacy systems
+- Hard rule: route to IPS immediately
+- Trigger terms: FedRAMP, FISMA, GSA, SEWP, CIO‑NS
+- Script:
+  “You’re in the public sector—our IPS team is purpose‑built for FedRAMP and procurement.
+   Let me connect you to them so you get accurate guidance.”
+
+======================================================================
+EDUCATION
+- Typical pains: device fleet, hybrid learning, student data security (FERPA), budget constraints
+- Best‑fit pillars: Modern Workplace; Security; Cloud
+- Discovery prompts:
+  * “How many devices are you supporting?”
+  * “What’s the hybrid learning model today?”
+  * “Any security incidents or compliance requirements to plan around?”
+
+END OF INDUSTRIES + IPS

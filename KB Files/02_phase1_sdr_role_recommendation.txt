@@ -1,0 +1,54 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: PROJECT_DOC
+DOC_ID: phase1_role_recommendation
+VERSION: 1.1
+EFFECTIVE_DATE: 2026-01-27
+TAGS: phase1, role-selection, sdr, demo-design, amy, insight
+SOURCE_SCOPE: Insight.com + ips.insight.com (where applicable); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+INSIGHT X‑AGENT ROLE SELECTION — PHASE 1 RECOMMENDATION
+
+RECOMMENDATION
+Role: Sales Development Representative (SDR)
+Confidence: 9/10
+
+WHY SDR IS THE BEST DEMO ROLE
+1) Demo clarity: everyone understands “qualify leads and book meetings.”
+2) Content availability: Insight publishes enough public info to support discovery.
+3) Stakeholder relevance: CRO/VP Sales, CIO, CFO all care about qualification and routing.
+4) Implementation fit: conversation + knowledge base is LLM-native.
+5) Measurable outcomes: BANT completeness, meeting acceptance, correct routing.
+
+SCORECARD (1–10)
+- Demo clarity: 9.5
+- Stakeholder relevance: 9.0
+- Content availability: 10.0
+- Wow factor: 8.5
+- Implementation ease: 9.0
+TOTAL: 9.0 / 10
+
+RUNNERS‑UP (WHY THEY LOST)
+- Solutions Architect:
+  + High wow factor, deeper technical validation
+  - Narrower audience, needs deeper architecture content and more risk of overclaiming
+
+- Public Sector Navigator:
+  + Strong differentiation via IPS expertise
+  - Narrower TAM for a universal demo; still essential as a routing destination
+
+- Client Executive Copilot / CSM:
+  - ROI measurement and scope are fuzzier for a short demo
+  - Harder to show immediate “before/after” impact
+
+DECISION RULE
+The demo wins when the audience instantly understands:
+INPUT: inbound inquiry / lead
+PROCESS: consultative discovery + qualification
+OUTPUT: routed meeting with the right specialist
+SDR is the most legible role for that contract.
+
+END OF FILE

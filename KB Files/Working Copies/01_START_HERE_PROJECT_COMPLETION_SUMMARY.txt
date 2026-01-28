@@ -1,0 +1,68 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: PROJECT_DOC
+DOC_ID: start_here_completion_summary
+VERSION: 1.1
+EFFECTIVE_DATE: 2026-01-27
+TAGS: start-here, overview, deployment, tavus, amy, insight, sdr
+SOURCE_SCOPE: Insight.com + ips.insight.com (where applicable); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+INSIGHT SDR X-AGENT (AMY) — KNOWLEDGE PACK SUMMARY
+
+PURPOSE
+Build a demo-ready X‑Agent for Insight Enterprises that can run clean discovery calls, qualify using BANT, and route to the right human team (AE / Specialist / IPS).
+
+WHAT THIS PACK CONTAINS (FILES 1–10)
+1) Start Here (this file)
+2) Phase 1 Role Recommendation (why SDR won)
+3) System Prompt (behavior + guardrails)
+4) Persona Context (identity + authority + buyer personas)
+5) KB Seed (company + pillars + quick lookup)
+6) Solutions Catalog (service menu + fit + handoff guidance)
+7) Industries + IPS Routing (vertical context + triggers)
+8) Partner Ecosystem (how to position vendors without lock‑in)
+9) Proof Points + Case Studies (credibility anchors)
+10) Discovery Questions Framework (structured + branching)
+
+HOW TO LOAD INTO TAVUS (MANUAL UPLOAD ORDER)
+1) SYSTEM PROMPT:
+   - Paste file 03 into Tavus “System Prompt” (or equivalent).
+   - Keep it as the single source of behavior, tone, and rules.
+
+2) PERSONA CONTEXT:
+   - Paste file 04 into Tavus “Persona Context”.
+   - This is identity + boundaries + role authority.
+
+3) KNOWLEDGE BASE:
+   - Upload/paste files 05–10 into Tavus Knowledge Base (KB).
+   - If Tavus supports tags per doc, keep the [TAVUS_UPLOAD] header intact.
+
+RECOMMENDED DEMO FLOW (90 seconds to “wow”)
+- Amy opens: “Thanks for reaching out—what’s your #1 priority for 2026?”
+- Amy diagnoses: current state + pain + impact
+- Amy qualifies: BANT snapshot in plain English
+- Amy routes: “Based on what you shared, I’d recommend a 30‑minute call with <specialist>.”
+
+OUTPUT CONTRACT (WHAT AMY SHOULD PRODUCE EVERY CALL)
+Amy ends each discovery with a short structured recap:
+- Prospect Summary (1–3 lines)
+- Pain + Impact (bullets)
+- BANT Status (Budget/Authority/Need/Timeline with ✅/⏳/❓)
+- Best‑Fit Pillar (Cloud / AI & Data / Security / Workplace / Public Sector)
+- Recommended Next Step (who + why + meeting ask)
+- IPS Routing Flag (YES/NO)
+
+SUCCESS METRICS (FOR TESTING)
+- Natural conversation quality (no robotic scripts)
+- BANT accuracy (human reviewer agrees ≥85%)
+- Correct routing choice (AE vs Specialist vs IPS)
+- Zero compliance violations (no price quotes; no invented claims)
+
+NOTES
+- If a prospect asks “how much,” Amy uses ranges only (see Solutions Catalog) and routes to an AE for specifics.
+- If a prospect is public sector (federal/state/local, FedRAMP/GSA/SEWP mentioned), Amy routes to IPS immediately.
+
+END OF FILE

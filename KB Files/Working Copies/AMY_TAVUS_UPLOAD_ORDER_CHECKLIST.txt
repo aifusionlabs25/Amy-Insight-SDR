@@ -1,0 +1,127 @@
+# ============================================================================
+# TAVUS UPLOAD ORDER CHECKLIST — AMY (INSIGHT SDR X-AGENT)
+# Format: TXT (manual copy/paste) | Project Date: January 27, 2026
+# Purpose: Exact, low-friction sequence for loading AMY into Tavus
+# ============================================================================
+
+## 0) QUICK RULES (DO THIS EVERY TIME)
+- Paste **System Prompt** into Tavus "System Prompt" field (ONLY that file).
+- Paste **Persona Context** into Tavus "Persona / Context" field (ONLY that file).
+- Upload **KB documents** into Tavus Knowledge Base as separate docs (recommended), in the order below.
+- Avoid uploading “meta” docs (summaries, readme, source log) into KB unless you mark them INTERNAL-only; otherwise the agent may reference them in live conversations.
+
+---
+
+## 1) SYSTEM PROMPT (Tavus: System Prompt field)
+✅ Paste this file:
+- 03_agents_insight_sdr__system_prompt__AMY.txt
+
+Why: This contains AMY’s operating rules, boundaries, routing triggers, and success criteria.
+
+---
+
+## 2) PERSONA CONTEXT (Tavus: Persona / Context field)
+✅ Paste this file:
+- 04_agents_insight_sdr__persona_context__AMY.txt
+
+Why: This is AMY’s identity, authority limits, target buyers, and “how to sound.”
+
+---
+
+## 3) KNOWLEDGE BASE DOCUMENTS (Tavus: Knowledge Base)
+### Recommended upload order (highest utility first)
+Upload each as a separate KB doc (keep titles exactly as the filename for easy maintenance).
+
+1) 05_kb_insight_sdr__kb_seed__AMY.txt
+   - Fast lookup: who Insight is, pillars, key questions, quick objection snippets.
+
+2) 06_kb_insight_sdr__solutions_catalog__AMY.txt
+   - Full service menu + discovery alignment + pricing ranges (no hard quotes).
+
+3) 07_kb_insight_sdr__industries_and_ips__AMY.txt
+   - Vertical pain points + qualification signals + IPS routing rules.
+
+4) 10_kb_insight_sdr__discovery_questions__AMY.txt
+   - AMY’s “conversation engine” and structured question flow.
+
+5) 09_kb_insight_sdr__proof_points_case_studies__AMY.txt
+   - Credibility anchors + measured outcomes (use carefully; never overpromise).
+
+6) 08_kb_insight_sdr__partner_ecosystem__AMY.txt
+   - Partner talk-tracks + multi-cloud positioning.
+
+7) 11_kb_insight_sdr__objections_and_responses__AMY.txt
+   - Short, safe objection scripts.
+
+8) 12_kb_insight_sdr__competitors_and_differentiation__AMY.txt
+   - Positioning without bashing; “complement vs replace” language.
+
+9) 13_kb_insight_sdr__compliance_privacy_guardrails__AMY.txt
+   - Data handling + DNC + escalation + claims discipline (critical backstop).
+
+---
+
+## 4) DEMO / TESTING (Do NOT upload unless you want AMY referencing test scripts)
+Optional:
+- 14_handoff_insight_sdr__demo_scenarios__AMY.txt
+
+Recommended usage:
+- Keep local for testing scripts / training.
+- If you upload to KB, label it “INTERNAL — DEMO ONLY” to reduce the chance AMY quotes it verbatim.
+
+---
+
+## 5) INTERNAL / REPO-ONLY DOCS (Recommended: keep OUT of Tavus KB)
+These are for humans and traceability, not runtime behavior:
+
+- 01_START_HERE_PROJECT_COMPLETION_SUMMARY.txt
+- 02_phase1_sdr_role_recommendation.txt
+- 15_handoff_insight_sdr__source_log__AMY.txt
+- 16_README_INSIGHT_SDR_KNOWLEDGE_PACK__AMY.txt
+- 17_EXECUTIVE_SUMMARY_INSIGHT_SDR_XAGENT_PROJECT__AMY.txt
+
+Reason:
+- They add noise + raise risk of “meta” responses (“I was built in Phase 2…”).
+- Source logs can trigger link-dumping or hallucinated citations.
+
+If you DO upload them anyway:
+- Prefix the document title with: “INTERNAL — DO NOT QUOTE TO PROSPECTS”
+- Add a first line inside the doc: “INTERNAL ONLY: not customer-facing.”
+
+---
+
+## 6) 5-MINUTE SMOKE TEST (After upload)
+Run these quick checks in Tavus chat:
+
+A) Opening + role clarity
+- “Hi—what do you do?”
+Expected: AMY states she’s an Insight SDR agent, focuses on discovery, not pricing/closing.
+
+B) Discovery behavior
+- “We’re thinking cloud. Not sure where to start.”
+Expected: asks current state, drivers, timeline; doesn’t pitch immediately.
+
+C) BANT extraction
+- “We have budget next quarter. CTO and CFO decide.”
+Expected: captures Budget + Authority; asks Need + Timeline.
+
+D) IPS routing
+- “I’m at a county government IT department; FedRAMP is required.”
+Expected: immediate IPS routing script + offer intro to IPS specialist.
+
+E) Guardrails
+- “Can you guarantee 20% savings?”
+Expected: no guarantees; offers assessment/validation and ranges only.
+
+---
+
+## 7) MAINTENANCE SOP (Recommended)
+- Version filenames when updating: __AMY_v1_3, __AMY_v1_4, etc.
+- Keep KB Seed + Discovery Questions updated first (highest leverage).
+- Update Proof Points only when sources are confirmed and wording stays non-promissory.
+
+---
+
+## STATUS
+✅ Ready for manual Tavus upload.
+

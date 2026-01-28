@@ -1,0 +1,86 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: KB
+DOC_ID: kb_seed
+VERSION: 1.1
+EFFECTIVE_DATE: 2026-01-27
+TAGS: kb, seed, company, pillars, amy, insight, quick-reference
+SOURCE_SCOPE: Insight.com + ips.insight.com (where applicable); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+INSIGHT SDR — KB SEED (QUICK REFERENCE)
+
+USE THIS KB FOR
+- Fast lookups during discovery calls
+- Consistent language across calls
+- Mapping pains to pillars + next steps
+
+QUICK LOOKUP INDEX
+- Company snapshot: section A
+- Pillars summary: section B
+- Industries overview: section C
+- Objections quick responses: section D
+- Routing rules (incl. IPS): section E
+
+----------------------------------------------------------------------
+A) COMPANY SNAPSHOT (INSIGHT ENTERPRISES)
+- Type: vendor‑agnostic solutions integrator
+- HQ: Chandler, Arizona
+- Global footprint: North America, EMEA, APAC, LATAM
+- What Insight does (plain English):
+  “We help organizations modernize, manage, and secure technology—cloud, AI, security, workplace, and public sector.”
+
+----------------------------------------------------------------------
+B) FIVE SOLUTION PILLARS (FAST MAP)
+
+1) CLOUD TRANSFORMATION
+- Best for: infrastructure modernization, migration, hybrid/multi‑cloud, FinOps
+- Common pains: aging hardware, cloud costs spiking, complexity across clouds
+- Strong next steps: Cloud assessment; FinOps assessment; migration planning
+
+2) AI & DATA TRANSFORMATION
+- Best for: GenAI/ML adoption, data readiness, stuck pilots, governance gaps
+- Common pains: “AI pilots not scaling,” unclear ROI, data quality issues
+- Strong next steps: AI readiness assessment; Prism-style validation workshop
+
+3) CYBERSECURITY & COMPLIANCE
+- Best for: zero‑trust, MDR/SOC, IAM, endpoint hardening, compliance automation
+- Common pains: audit findings, incident fear, endpoint sprawl, access chaos
+- Strong next steps: security assessment; zero‑trust roadmap; IAM review
+
+4) MODERN WORKPLACE
+- Best for: device lifecycle, M365/Teams adoption, helpdesk scaling, UC modernization
+- Common pains: device chaos, adoption failure, helpdesk overload, hybrid friction
+- Strong next steps: device assessment; adoption plan; UC readiness
+
+5) PUBLIC SECTOR (IPS)
+- Best for: government modernization, FedRAMP/FISMA, procurement vehicles
+- Trigger: any federal/state/local agency OR FedRAMP/GSA/SEWP mentioned
+- Strong next step: route to IPS specialist immediately
+
+----------------------------------------------------------------------
+C) INDUSTRIES (FAST NOTES)
+- Healthcare: HIPAA, EHR interoperability, imaging backlogs, security
+- Retail: omnichannel, store tech, cloud spend, personalization
+- Manufacturing: downtime, predictive maintenance, IoT/edge, supply chain visibility
+- Financial services: compliance, fraud, GenAI security, legacy modernization
+- Government: FedRAMP/FISMA, procurement cycles (IPS)
+- Education: device fleet, hybrid learning, FERPA, budget constraints
+
+----------------------------------------------------------------------
+D) COMMON OBJECTIONS (ONE‑LINE RESPONSES)
+- “Too expensive” → “Let’s quantify impact first; optimization often funds modernization.”
+- “Vendor lock‑in” → “We’re vendor‑agnostic; we design best‑fit and multi‑cloud when appropriate.”
+- “We’ll build it” → “Hybrid model can accelerate outcomes while building internal capability.”
+
+----------------------------------------------------------------------
+E) ROUTING RULES (FAST)
+- Public sector → IPS immediately
+- GenAI/AI validation → AI specialist
+- Audit/incident/zero‑trust → Security specialist
+- Cloud spend spike / migration → Cloud/FinOps specialist
+- Device + M365 adoption issues → Workplace specialist
+
+END OF KB SEED

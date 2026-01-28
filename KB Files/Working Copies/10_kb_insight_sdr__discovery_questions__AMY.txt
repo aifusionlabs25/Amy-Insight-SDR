@@ -1,0 +1,88 @@
+[TAVUS_UPLOAD]
+AGENT_NAME: Amy
+PACKAGE: Insight_SDR
+DOC_TYPE: KB
+DOC_ID: discovery_questions
+VERSION: 1.1
+EFFECTIVE_DATE: 2026-01-27
+TAGS: kb, discovery, questions, bant, amy, insight, call-flow
+SOURCE_SCOPE: Insight.com + ips.insight.com (where applicable); internal demo pack only
+POLICY: No pricing commitments; no legal/compliance advice; no invented claims; escalate when unsure
+[/TAVUS_UPLOAD]
+
+INSIGHT SDR — DISCOVERY QUESTIONS (AMY) | FRAMEWORK + BRANCHING
+
+PHILOSOPHY
+Ask to understand before suggesting. Map business pain → IT gap → Insight pillar → next step.
+
+----------------------------------------------------------------------
+A) 10‑QUESTION “FAST PATH” (USE WHEN TIME IS TIGHT)
+
+1) “What’s your #1 priority for 2026?”
+2) “What prompted you to look at this now?”
+3) “Where are you today—on‑prem, cloud, or hybrid?”
+4) “Which platforms are in play (AWS/Azure/GCP)?”
+5) “What’s the biggest challenge: cost, security, modernization, talent, or speed?”
+6) “What’s the business impact if nothing changes?”
+7) “Who else needs to be involved in decisions like this?”
+8) “Is budget allocated or planned?”
+9) “When do you need a result by?”
+10) “Would a 30‑minute call with the right specialist be valuable next?”
+
+----------------------------------------------------------------------
+B) DEEP PATH (USE FOR FULL DISCOVERY)
+
+OPENING & CONTEXT
+- “How is technology enabling or limiting your top priority?”
+- “What does success look like 12 months from now?”
+
+CURRENT STATE
+- “What does your infrastructure look like today?”
+- “How large is your IT team and how stretched are they?”
+- “How much of your budget is ‘keep the lights on’ vs innovation?”
+
+PAIN BRANCHES (CHOOSE BASED ON THEIR SIGNAL)
+
+COST / FINOPS
+- “Any unexpected cloud spikes?”
+- “Do you have cost visibility by department/app?”
+- “Do you have a FinOps governance process?”
+
+SECURITY / COMPLIANCE
+- “Recent assessment or audit findings?”
+- “Any incident or near‑miss?”
+- “Is zero‑trust a mandate or a goal?”
+
+MODERNIZATION
+- “How old is core infrastructure?”
+- “Any data center refresh deadlines?”
+- “What’s blocking migration—risk, skills, budget, complexity?”
+
+TALENT / BURNOUT
+- “Hiring challenges?”
+- “Would managed services relieve pressure?”
+- “Any helpdesk backlog or SLA issues?”
+
+AI / GENAI
+- “What use cases are you exploring (customer support, content, automation)?”
+- “What’s preventing scale—data, governance, risk, skills?”
+- “Would a short validation workshop help leadership decide?”
+
+BANT QUALIFICATION (PLAIN ENGLISH)
+Budget: “Is funding allocated or planned?”
+Authority: “Who signs off?”
+Need: “What breaks if you do nothing?”
+Timeline: “When do you need this solved?”
+
+----------------------------------------------------------------------
+C) CLOSING (GET TO A CALENDAR ASK)
+
+- “Based on what you shared, the best next step is a short call with <specialist>.
+   Would Thursday morning or Friday afternoon work better?”
+
+IPS HARD STOP
+If prospect is government/public sector or mentions FedRAMP/GSA/SEWP/FISMA/CIO‑NS:
+- capture essentials
+- route to IPS immediately
+
+END OF DISCOVERY QUESTIONS
