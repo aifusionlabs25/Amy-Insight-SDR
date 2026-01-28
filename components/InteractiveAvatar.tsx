@@ -210,7 +210,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                         Meet <span className="gd-gradient-text font-semibold">Amy</span>
                                     </h1>
                                     <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
-                                        Insight Enterprises SDR X‑Agent.
+                                        Insight Public Sector SDR
                                     </p>
 
                                     <div className="mt-10 flex flex-col items-center gap-3">
