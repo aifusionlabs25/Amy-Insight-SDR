@@ -235,6 +235,13 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                     <p className="mt-10 text-xs text-slate-400 max-w-md font-medium tracking-wide">
                                         Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
                                     </p>
+
+                                    {/* Footer - Only on Landing */}
+                                    <footer className="absolute bottom-[15%] left-0 w-full text-center px-4 pointer-events-none">
+                                        <p className="text-[10px] text-black/70 uppercase tracking-widest">
+                                            Insight Public Sector • SDR X-Agent (Amy v1.0) • Internal Demo Only
+                                        </p>
+                                    </footer>
                                 </div>
                             )}
                         </div>
