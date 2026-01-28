@@ -58,11 +58,7 @@ body {
   color: rgb(var(--gd-text));
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   /* Default Next.js font or Outfit if ported */
-  background:
-    radial-gradient(1200px 800px at 50% -15%, rgba(var(--gd-blue), 0.15), transparent 60%),
-    radial-gradient(900px 600px at 0% 0%, rgba(var(--gd-gold), 0.15), transparent 55%),
-    /* Insight Glow */
-    linear-gradient(180deg, rgb(var(--gd-bg0)) 0%, #000000 100%);
+  background: linear-gradient(135deg, rgb(var(--gd-gold)) 0%, rgb(var(--gd-blue)) 100%);
   overflow-x: hidden;
 }
 
@@ -129,6 +125,9 @@ body::before {
         rgba(var(--gd-blue), 0.50),
         rgba(var(--gd-gold), 0.50));
     -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;

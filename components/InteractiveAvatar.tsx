@@ -148,7 +148,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
     return (
         <CVIProvider>
             <div className="relative h-screen w-full overflow-hidden text-white selection:bg-[rgb(var(--gd-gold))]/30">
-                <ShellBackground />
+                {/* ShellBackground removed for seamless gradient */}
 
                 {/* HEADER */}
                 <header className="fixed left-0 top-0 z-[300] w-full px-6 md:px-10 py-4">
@@ -194,7 +194,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                     </div>
                                 </div>
                             ) : (
-                                <div className="gd-glass mx-auto flex flex-col items-center justify-center text-center px-10 py-14 md:px-14 md:py-16">
+                                <div className="mx-auto flex flex-col items-center justify-center text-center px-10 py-14 md:px-14 md:py-16">
                                     <div className="relative mb-8 gd-float">
                                         <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
                                         <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30">
