@@ -29,7 +29,7 @@ function ShellBackground() {
             {/* Deep Navy/Black Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#020617] to-black" />
             {/* Gold Glows */}
-            <div className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 h-[780px] w-[780px] rounded-full bg-[#AE0A46]/10 blur-[120px]" />
+            <div className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 h-[780px] w-[780px] rounded-full bg-[rgb(var(--gd-gold))]/10 blur-[120px]" />
             <div className="absolute right-[-180px] bottom-[-220px] h-[640px] w-[840px] rounded-full bg-blue-900/20 blur-[130px]" />
             <div className="absolute inset-0 gd-grid opacity-[0.3]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_70%,rgba(0,0,0,0.9)_100%)]" />
@@ -147,7 +147,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
 
     return (
         <CVIProvider>
-            <div className="relative h-screen w-full overflow-hidden text-white selection:bg-[#AE0A46]/30">
+            <div className="relative h-screen w-full overflow-hidden text-white selection:bg-[rgb(var(--gd-gold))]/30">
                 <ShellBackground />
 
                 {/* HEADER */}
@@ -164,7 +164,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                             {!conversation && (
                                 <>
                                     <button onClick={openCalendly} className="gd-btn" type="button">
-                                        <IconCalendar className="h-4 w-4 text-[#AE0A46]" />
+                                        <IconCalendar className="h-4 w-4 text-[rgb(var(--gd-gold))]" />
                                         <span>Book Consultation</span>
                                     </button>
                                     <button onClick={() => setShowContactForm(true)} className="gd-btn" type="button">
@@ -196,8 +196,8 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                             ) : (
                                 <div className="gd-glass mx-auto flex flex-col items-center justify-center text-center px-10 py-14 md:px-14 md:py-16">
                                     <div className="relative mb-8 gd-float">
-                                        <div className="absolute inset-0 rounded-full bg-[#AE0A46]/20 blur-2xl" />
-                                        <div className="rounded-full bg-gradient-to-tr from-blue-900/30 to-[#AE0A46]/30 p-2 border border-[#AE0A46]/30">
+                                        <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
+                                        <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30">
                                             <img
                                                 src="/amy.png"
                                                 alt="Amy Headshot"
@@ -253,16 +253,16 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                             </div>
 
                             {contactSuccess ? (
-                                <div className="gd-badge border-[#AE0A46]/25 bg-[#AE0A46]/10 text-pink-100">
-                                    <span className="h-2 w-2 rounded-full bg-[#AE0A46]" />
+                                <div className="gd-badge border-[rgb(var(--gd-gold))]/25 bg-[rgb(var(--gd-gold))]/10 text-pink-100">
+                                    <span className="h-2 w-2 rounded-full bg-[rgb(var(--gd-gold))]" />
                                     <span className="text-sm">Message received. We will contact you.</span>
                                 </div>
                             ) : (
                                 <form onSubmit={handleContactSubmit} className="space-y-4">
-                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[#AE0A46] outline-none" placeholder="Your Name" value={contactForm.name} onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} required />
-                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[#AE0A46] outline-none" placeholder="Email Address" type="email" value={contactForm.email} onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} required />
-                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[#AE0A46] outline-none" placeholder="Phone Number" value={contactForm.phone} onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })} />
-                                    <textarea className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[#AE0A46] outline-none min-h-[100px]" placeholder="How can we help?" value={contactForm.message} onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} required />
+                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Your Name" value={contactForm.name} onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} required />
+                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Email Address" type="email" value={contactForm.email} onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} required />
+                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Phone Number" value={contactForm.phone} onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })} />
+                                    <textarea className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none min-h-[100px]" placeholder="How can we help?" value={contactForm.message} onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} required />
 
                                     <button type="submit" disabled={contactSubmitting} className="gd-btn gd-btn-primary w-full py-3 disabled:opacity-50 text-white">
                                         {contactSubmitting ? 'Sending...' : 'Send Message'}

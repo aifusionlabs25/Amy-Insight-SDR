@@ -154,7 +154,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                     onChange={(e) => setName(e.target.value)}
                                     placeholder="Enter your name"
                                     required
-                                    className="w-full px-4 py-3 bg-slate-950/50 border border-slate-700 rounded-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#AE0A46] transition-all"
+                                    className="w-full px-4 py-3 bg-slate-950/50 border border-slate-700 rounded-sm text-white placeholder-slate-600 focus:outline-none focus:border-[rgb(var(--gd-gold))] transition-all"
                                 />
                             </div>
 
@@ -168,7 +168,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="name@company.com"
                                     required
-                                    className="w-full px-4 py-3 bg-slate-950/50 border border-slate-700 rounded-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#AE0A46] transition-all"
+                                    className="w-full px-4 py-3 bg-slate-950/50 border border-slate-700 rounded-sm text-white placeholder-slate-600 focus:outline-none focus:border-[rgb(var(--gd-gold))] transition-all"
                                 />
                             </div>
 
@@ -182,7 +182,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                     onChange={(e) => setToken(e.target.value)}
                                     placeholder="Enter secure code"
                                     required
-                                    className="w-full px-4 py-3 bg-slate-950/50 border border-slate-700 rounded-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#AE0A46] transition-all"
+                                    className="w-full px-4 py-3 bg-slate-950/50 border border-slate-700 rounded-sm text-white placeholder-slate-600 focus:outline-none focus:border-[rgb(var(--gd-gold))] transition-all"
                                 />
                             </div>
 
@@ -195,7 +195,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                             <button
                                 type="submit"
                                 disabled={loading || !name || !email || !token}
-                                className="w-full py-3 bg-gradient-to-r from-[#AE0A46] to-[#D40E8C] hover:from-[#D40E8C] hover:to-[#AE0A46] text-white font-bold uppercase tracking-wide rounded-sm shadow-lg shadow-pink-900/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full py-3 bg-gradient-to-r from-[rgb(var(--gd-gold))] to-[rgb(var(--gd-blue))] hover:from-[rgb(var(--gd-blue))] hover:to-[rgb(var(--gd-gold))] text-white font-bold uppercase tracking-wide rounded-sm shadow-lg shadow-pink-900/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {loading ? 'Verifying...' : 'System Access'}
                             </button>
@@ -203,7 +203,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                     </form>
 
                     <p className="text-center text-slate-600 text-xs mt-6">
-                        Need access? <button onClick={() => setIsRequestOpen(true)} className="text-[#AE0A46] hover:text-[#D40E8C] underline underline-offset-2 transition-colors">Request credential</button>
+                        Need access? <button onClick={() => setIsRequestOpen(true)} className="text-[rgb(var(--gd-gold))] hover:text-[rgb(var(--gd-blue))] underline underline-offset-2 transition-colors">Request credential</button>
                     </p>
                 </div>
             </div>
@@ -228,7 +228,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                         {reqSuccess ? (
                             <div className="text-center py-8">
                                 <div className="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-yellow-500/20">
-                                    <svg className="w-8 h-8 text-[#AE0A46]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-8 h-8 text-[rgb(var(--gd-gold))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
@@ -250,7 +250,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                         value={reqName}
                                         onChange={e => setReqName(e.target.value)}
                                         required
-                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[#AE0A46] focus:outline-none"
+                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[rgb(var(--gd-gold))] focus:outline-none"
                                     />
                                 </div>
                                 <div>
@@ -259,7 +259,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                         placeholder="Company / Firm"
                                         value={reqCompany}
                                         onChange={e => setReqCompany(e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[#AE0A46] focus:outline-none"
+                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[rgb(var(--gd-gold))] focus:outline-none"
                                     />
                                 </div>
                                 <div>
@@ -268,7 +268,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                         placeholder="Website"
                                         value={reqWebsite}
                                         onChange={e => setReqWebsite(e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[#AE0A46] focus:outline-none"
+                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[rgb(var(--gd-gold))] focus:outline-none"
                                     />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
@@ -277,7 +277,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                         placeholder="Phone"
                                         value={reqPhone}
                                         onChange={e => setReqPhone(e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[#AE0A46] focus:outline-none"
+                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[rgb(var(--gd-gold))] focus:outline-none"
                                     />
                                     <input
                                         type="email"
@@ -285,7 +285,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                         value={reqEmail}
                                         onChange={e => setReqEmail(e.target.value)}
                                         required
-                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[#AE0A46] focus:outline-none"
+                                        className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-sm text-white focus:border-[rgb(var(--gd-gold))] focus:outline-none"
                                     />
                                 </div>
 
@@ -294,7 +294,7 @@ export default function AccessGate({ children }: AccessGateProps) {
                                 <button
                                     type="submit"
                                     disabled={reqLoading}
-                                    className="w-full py-3 bg-[#AE0A46] hover:bg-[#D40E8C] text-white font-semibold rounded-sm shadow-lg transition-all disabled:opacity-50"
+                                    className="w-full py-3 bg-[rgb(var(--gd-gold))] hover:bg-[rgb(var(--gd-blue))] text-white font-semibold rounded-sm shadow-lg transition-all disabled:opacity-50"
                                 >
                                     {reqLoading ? 'Sending...' : 'Submit Request'}
                                 </button>

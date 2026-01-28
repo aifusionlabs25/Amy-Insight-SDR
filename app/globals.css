@@ -59,9 +59,9 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   /* Default Next.js font or Outfit if ported */
   background:
-    radial-gradient(1200px 800px at 50% -15%, rgba(59, 130, 246, 0.15), transparent 60%),
-    radial-gradient(900px 600px at 0% 0%, rgba(234, 179 8, 0.10), transparent 55%),
-    /* Gold glow */
+    radial-gradient(1200px 800px at 50% -15%, rgba(var(--gd-blue), 0.15), transparent 60%),
+    radial-gradient(900px 600px at 0% 0%, rgba(var(--gd-gold), 0.15), transparent 55%),
+    /* Insight Glow */
     linear-gradient(180deg, rgb(var(--gd-bg0)) 0%, #000000 100%);
   overflow-x: hidden;
 }
@@ -87,13 +87,13 @@ body::before {
 }
 
 ::selection {
-  background: rgba(234, 179, 8, 0.25);
-  /* Gold selection */
+  background: rgba(var(--gd-gold), 0.3);
+  /* Insight selection */
   color: white;
 }
 
 :focus-visible {
-  outline: 2px solid rgba(234, 179, 8, 0.65);
+  outline: 2px solid rgba(var(--gd-gold), 0.65);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -124,10 +124,10 @@ body::before {
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    /* Gold/Blue Gradient Border */
+    /* Insight Gradient Border */
     background: linear-gradient(135deg,
-        rgba(59, 130, 246, 0.40),
-        rgba(234, 179, 8, 0.40));
+        rgba(var(--gd-blue), 0.50),
+        rgba(var(--gd-gold), 0.50));
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
@@ -157,22 +157,21 @@ body::before {
 
   .gd-btn:hover {
     background: rgba(255, 255, 255, 0.10);
-    border-color: rgba(234, 179, 8, 0.4);
+    border-color: rgba(var(--gd-gold), 0.4);
     transform: translateY(-1px);
   }
 
   .gd-btn-primary {
     border: 0;
-    background: linear-gradient(90deg, rgba(202, 138, 4, 1), rgba(234, 179, 8, 1));
-    /* Gold Gradient */
-    box-shadow: 0 0 20px rgba(234, 179, 8, 0.2);
-    color: black;
-    /* Gold bg needs dark text usually, or keeping white if contrast is ok. Gold 500 is bright. */
+    /* Insight Gradient: Red -> Purple */
+    background: linear-gradient(90deg, rgb(var(--gd-gold)), rgb(var(--gd-blue)));
+    box-shadow: 0 0 20px rgba(var(--gd-gold), 0.4);
+    color: white;
     font-weight: 600;
   }
 
   .gd-btn-primary:hover {
-    box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
+    box-shadow: 0 0 30px rgba(var(--gd-gold), 0.6);
   }
 
   .gd-btn-danger {
@@ -180,10 +179,9 @@ body::before {
     background: linear-gradient(90deg, rgba(153, 27, 27, 1), rgba(220, 38, 38, 1));
   }
 
-  /* Gradient Text */
+  /* Gradient Text - Insight Brand */
   .gd-gradient-text {
-    background: linear-gradient(90deg, #EAB308, #FCD34D);
-    /* Gold to Light Gold */
+    background: linear-gradient(90deg, rgb(var(--gd-gold)), rgb(var(--gd-blue)));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
