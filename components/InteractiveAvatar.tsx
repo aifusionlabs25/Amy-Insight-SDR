@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo.png" alt="Insight Enterprises" className="h-12 w-auto object-contain invert mix-blend-screen opacity-90" />
+                                <img src="/insight-logo-clean.png" alt="Insight Enterprises" className="h-12 w-auto object-contain" />
                             </a>
                         </div>
 
@@ -186,7 +186,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 {/* MAIN */}
                 <main className="h-full w-full pt-[72px]">
                     <section className="flex h-[calc(100vh-72px)] w-full items-center justify-center px-6">
-                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl'}>
+                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10'}>
                             {conversation ? (
                                 <div className="gd-stage">
                                     <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden">
@@ -194,26 +194,28 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                     </div>
                                 </div>
                             ) : (
-                                <div className="mx-auto flex flex-col items-center justify-center text-center px-10 py-14 md:px-14 md:py-16">
-                                    <div className="relative mb-8 gd-float">
-                                        <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
-                                        <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30">
-                                            <img
-                                                src="/amy.png"
-                                                alt="Amy Headshot"
-                                                className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover opacity-95"
-                                            />
+                                <div className="mx-auto flex flex-col items-center justify-between text-center flex-1 py-10">
+                                    <div className="flex flex-col items-center">
+                                        <div className="relative mb-8 gd-float">
+                                            <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
+                                            <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30">
+                                                <img
+                                                    src="/amy.png"
+                                                    alt="Amy Headshot"
+                                                    className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover opacity-95"
+                                                />
+                                            </div>
                                         </div>
+
+                                        <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
+                                            Meet <span className="text-white font-semibold">Amy</span>
+                                        </h1>
+                                        <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
+                                            Insight Public Sector SDR
+                                        </p>
                                     </div>
 
-                                    <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
-                                        Meet <span className="text-white font-semibold">Amy</span>
-                                    </h1>
-                                    <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
-                                        Insight Public Sector SDR
-                                    </p>
-
-                                    <div className="mt-10 flex flex-col items-center gap-3">
+                                    <div className="flex flex-col items-center gap-3">
                                         <button
                                             onClick={startConversation}
                                             disabled={loading}
@@ -232,16 +234,18 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                         )}
                                     </div>
 
-                                    <p className="mt-10 text-xs text-slate-400 max-w-md font-medium tracking-wide">
-                                        Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
-                                    </p>
-
-                                    {/* Footer - Only on Landing */}
-                                    <footer className="absolute bottom-[15%] left-0 w-full text-center px-4 pointer-events-none">
-                                        <p className="text-[10px] text-black/70 uppercase tracking-widest">
-                                            Insight Public Sector • SDR X-Agent (Amy v1.0) • Internal Demo Only
+                                    <div className="flex flex-col items-center">
+                                        <p className="text-xs text-slate-400 max-w-md font-medium tracking-wide">
+                                            Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
                                         </p>
-                                    </footer>
+
+                                        {/* Footer - Only on Landing */}
+                                        <footer className="mt-8 text-center px-4 pointer-events-none">
+                                            <p className="text-[10px] text-black/70 uppercase tracking-widest">
+                                                Insight Public Sector • SDR X-Agent (Amy v1.0) • Internal Demo Only
+                                            </p>
+                                        </footer>
+                                    </div>
                                 </div>
                             )}
                         </div>
