@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-12 w-auto object-contain" />
+                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-16 w-auto object-contain" />
                             </a>
                         </div>
 
@@ -215,7 +215,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-col items-center gap-3">
+                                    <div className="flex flex-col items-center gap-3 mt-10">
                                         <button
                                             onClick={startConversation}
                                             disabled={loading}
@@ -234,7 +234,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                         )}
                                     </div>
 
-                                    <div className="flex flex-col items-center">
+                                    <div className="flex flex-col items-center mt-20">
                                         <p className="text-xs text-slate-400 max-w-md font-medium tracking-wide">
                                             Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
                                         </p>
