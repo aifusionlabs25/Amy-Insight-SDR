@@ -62,8 +62,8 @@ export const SearchAssist: React.FC<{ isOpen: boolean; onClose: () => void; onOp
             const data: SearchResponse = await res.json();
             setResults(data.matches);
 
-            // Auto-open if confidence is high (exact PN match)
-            if (data.matches.length > 0 && data.matches[0].confidence >= 0.9) {
+            // Auto-open if confidence is high (exact PN match or strong keyword match)
+            if (data.matches.length > 0 && data.matches[0].confidence >= 0.7) {
                 openProduct(data.matches[0]);
             }
         } catch (err) {
@@ -154,45 +154,59 @@ export const SearchAssist: React.FC<{ isOpen: boolean; onClose: () => void; onOp
                             </a>
                         </div>
 
-                        <div className="flex-1 relative bg-white">
-                            {/* Fallback Message Layer (Shown if iframe fails or as a safety) */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-slate-900">
+                        <div className="flex-1 relative bg-slate-900 overflow-y-auto">
+                            {/* Detailed Product Card - Primary UI */}
+                            <div className="flex flex-col items-center justify-start p-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 {activeProduct && (
-                                    <div className="max-w-md w-full bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl mb-6 transform scale-95 opacity-90">
-                                        <div className="flex items-start gap-4 mb-4 text-left">
-                                            {activeProduct.imageUrl && (
-                                                <img src={activeProduct.imageUrl} alt="" className="w-20 h-20 object-contain rounded bg-white p-1" />
-                                            )}
-                                            <div>
-                                                <h3 className="font-semibold text-white leading-tight">{activeProduct.title}</h3>
-                                                <p className="text-sm text-slate-400 mt-1">{activeProduct.manufacturer} | PN: {activeProduct.partNumber}</p>
+                                    <div className="w-full max-w-lg bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 shadow-2xl mb-6">
+                                        <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6 text-left">
+                                            <div className="w-32 h-32 rounded-xl bg-white flex items-center justify-center p-3 shadow-inner flex-shrink-0">
+                                                {activeProduct.imageUrl ? (
+                                                    <img src={activeProduct.imageUrl} alt="" className="max-w-full max-h-full object-contain" />
+                                                ) : (
+                                                    <IconPackage className="text-slate-300" size={48} />
+                                                )}
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="text-[10px] font-bold text-[rgb(var(--gd-gold))] px-2 py-0.5 rounded-full bg-[rgb(var(--gd-gold))]/10 uppercase border border-[rgb(var(--gd-gold))]/20">
+                                                        {activeProduct.manufacturer}
+                                                    </span>
+                                                    <span className="text-xs text-slate-500 font-mono">PN: {activeProduct.partNumber}</span>
+                                                </div>
+                                                <h3 className="text-xl font-semibold text-white leading-tight mb-3">{activeProduct.title}</h3>
+                                                <div className="space-y-2">
+                                                    <p className="text-sm font-medium text-slate-400">Specifications:</p>
+                                                    <div className="bg-slate-900/50 rounded-lg p-3 text-xs text-slate-300 leading-relaxed border border-slate-700/50">
+                                                        {activeProduct.shortSpecs}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="bg-slate-900/50 rounded-lg p-3 text-xs text-slate-300 mb-4 text-left">
-                                            {activeProduct.shortSpecs}
+
+                                        <div className="grid grid-cols-1 gap-3">
+                                            <a
+                                                href={activeProduct.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-full gd-btn gd-btn-primary py-3 rounded-xl justify-center text-sm font-bold tracking-wider"
+                                            >
+                                                <IconExternalLink size={18} className="mr-2" />
+                                                VIEW FULL DETAILS ON INSIGHT.COM
+                                            </a>
+                                            <p className="text-[10px] text-slate-500 italic mt-2">
+                                                * Real-time availability and pricing may vary by region and contract.
+                                            </p>
                                         </div>
-                                        <a
-                                            href={activeProduct.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-full gd-btn text-center justify-center"
-                                        >
-                                            <IconExternalLink size={16} className="mr-2" />
-                                            Open Product in New Tab
-                                        </a>
-                                        <p className="text-[10px] text-slate-500 mt-4 italic">
-                                            Note: External product pages may be blocked from embedding.
-                                            The link above provides a secure, full-page view.
-                                        </p>
                                     </div>
                                 )}
                             </div>
 
-                            {/* The actual iframe (attempts to load) */}
+                            {/* Background Iframe (尝试加载，但不作为主UI) */}
                             <iframe
                                 ref={iframeRef}
                                 src={viewingUrl}
-                                className="absolute inset-0 w-full h-full border-0 bg-white"
+                                className="absolute inset-0 w-full h-full border-0 bg-white opacity-0 pointer-events-none"
                                 title="Product Detail"
                                 onError={() => setIframeBlocked(true)}
                             />

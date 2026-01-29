@@ -6,6 +6,7 @@ export class MockSearchProvider implements SearchProvider {
 
     async search(query: string, mode: "auto" | "pn" | "keyword"): Promise<SearchMatch[]> {
         const normalizedQuery = query.toLowerCase().trim();
+        const stems = normalizedQuery.split(/\s+/).map(word => word.replace(/s$/, '')); // Simple suffix stripping (e.g. thinkpads -> thinkpad)
 
         // 1. Exact PN Match (High Priority)
         const pnMatches = MOCK_CATALOG
@@ -20,6 +21,9 @@ export class MockSearchProvider implements SearchProvider {
         const keywords = normalizedQuery.split(/\s+/);
         const matches: SearchMatch[] = MOCK_CATALOG.map(product => {
             let score = 0;
+            const titleLower = product.title.toLowerCase();
+            const mfrLower = product.manufacturer.toLowerCase();
+            const pnLower = product.partNumber.toLowerCase();
             const fullText = `${product.title} ${product.manufacturer} ${product.partNumber} ${product.shortSpecs} ${product.description}`.toLowerCase();
 
             // Exact full phrase match
@@ -27,15 +31,19 @@ export class MockSearchProvider implements SearchProvider {
                 score += 0.5;
             }
 
-            // Keyword count match
-            keywords.forEach(word => {
+            // Keyword count match (stems + original)
+            const allTokens = new Set([...keywords, ...stems]);
+            allTokens.forEach(word => {
                 if (fullText.includes(word)) {
-                    score += 0.1;
+                    score += 0.15;
+                    // Boost if matches title or manufacturer
+                    if (titleLower.includes(word)) score += 0.1;
+                    if (mfrLower === word) score += 0.2;
                 }
             });
 
             // PN partial match
-            if (product.partNumber.toLowerCase().includes(normalizedQuery)) {
+            if (pnLower.includes(normalizedQuery)) {
                 score += 0.3;
             }
 
