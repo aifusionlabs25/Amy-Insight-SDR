@@ -58,16 +58,23 @@ function InteractiveAvatarInner({ userName, userEmail }: InteractiveAvatarProps)
             console.log('[AvatarHub] 🔔 Incoming Message:', event);
             const data = (event as any).data;
             if (data?.event === 'tool_call' && data?.name === 'search_assist') {
-                const query = data.arguments?.query_text || data.arguments?.query;
+                // Support all potential parameter names from different AI versions/dashboard settings
+                const query = data.arguments?.query_text || data.arguments?.query || data.arguments?.queryText;
+
                 console.log('[AvatarHub] 🎯 Search assist triggered:', query);
                 if (query) {
                     setIsSearchOpen(true);
-                    // Use a short delay to ensure the panel is mounted if it wasn't
-                    setTimeout(() => {
+                    // Use a slightly longer delay and a retry mechanism for mounting
+                    let attempts = 0;
+                    const triggerInternal = () => {
                         if ((window as any).amySearchAssist) {
                             (window as any).amySearchAssist(query);
+                        } else if (attempts < 5) {
+                            attempts++;
+                            setTimeout(triggerInternal, 100);
                         }
-                    }, 100);
+                    };
+                    setTimeout(triggerInternal, 50);
                 }
             }
         }
