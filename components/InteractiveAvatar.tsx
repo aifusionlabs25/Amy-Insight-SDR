@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-20 w-auto object-contain" />
+                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-24 w-auto object-contain" />
                             </a>
                         </div>
 
@@ -186,7 +186,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 {/* MAIN */}
                 <main className="h-full w-full pt-[72px]">
                     <section className="flex h-[calc(100vh-72px)] w-full items-center justify-center px-6">
-                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform -translate-y-[12%]'}>
+                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[8%]'}>
                             {conversation ? (
                                 <div className="gd-stage">
                                     <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden">
@@ -195,7 +195,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                 </div>
                             ) : (
                                 <div className="mx-auto flex flex-col items-center justify-between text-center flex-1 py-10">
-                                    <div className="flex flex-col items-center">
+                                    <div className="flex flex-col items-center mt-6">
                                         <div className="relative mb-8 gd-float">
                                             <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
                                             <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30 overflow-hidden">
@@ -207,19 +207,21 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                             </div>
                                         </div>
 
-                                        <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
-                                            Meet <span className="text-white font-semibold">Amy</span>
-                                        </h1>
-                                        <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
-                                            Insight Public Sector SDR
-                                        </p>
+                                        <div className="mt-4">
+                                            <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
+                                                Meet <span className="text-white font-semibold">Amy</span>
+                                            </h1>
+                                            <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
+                                                Insight Public Sector SDR
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <div className="flex flex-col items-center gap-3 mt-10">
+                                    <div className="flex flex-col items-center gap-3 mt-16">
                                         <button
                                             onClick={startConversation}
                                             disabled={loading}
-                                            className="gd-btn px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10"
+                                            className="gd-btn px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10 hover:shadow-[0_0_30px_rgba(var(--gd-gold),0.4)] transition-all duration-300"
                                             type="button"
                                         >
                                             <span>{loading ? 'Connecting...' : 'Speak with Amy'}</span>
@@ -234,7 +236,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                         )}
                                     </div>
 
-                                    <div className="flex flex-col items-center mt-20">
+                                    <div className="flex flex-col items-center mt-24">
                                         <p className="text-xs text-slate-400 max-w-md font-medium tracking-wide">
                                             Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
                                         </p>
