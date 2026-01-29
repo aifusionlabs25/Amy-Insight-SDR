@@ -14,7 +14,7 @@ export class GoogleSheetsService {
         console.log(`- GOOGLE_SERVICE_ACCOUNT_KEY: ${process.env.GOOGLE_SERVICE_ACCOUNT_KEY ? 'Set' : 'Missing'}`);
         console.log(`- GOOGLE_SHEET_ID: ${process.env.GOOGLE_SHEET_ID ? 'Set' : 'Missing'}`);
 
-        // Support both "James" standard and "Morgan" legacy naming conventions
+        // Check for required Service Account credentials
         const clientEmail = process.env.GOOGLE_CLIENT_EMAIL || process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
         const rawKey = process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
         const privateKey = rawKey?.replace(/\\n/g, '\n');
@@ -31,7 +31,7 @@ export class GoogleSheetsService {
             });
             console.log('[GoogleSheets] ✅ Auth Configured');
         } else {
-            console.warn('[GoogleSheets] ⚠️ Credentials missing (checked both standard and legacy formats). Logging disabled.');
+            console.warn('[GoogleSheets] ⚠️ Credentials missing. Logging disabled.');
         }
     }
 
@@ -44,9 +44,7 @@ export class GoogleSheetsService {
         try {
             const sheets = google.sheets({ version: 'v4', auth: this.auth });
 
-            // Standard Columns for Legal Intake
-            // Date, Time, ConvID, Name, Email, Phone, Type, Summary, Liability, Risk Factors, Action Plan, Recording
-            // Standard Layout (reused columns)
+            // Standard Layout (Insight IT Solutions)
             // Date, Time, ConvID, Name, Email, Phone, [InquiryType], [Budget/Timeline], [Status], [Blockers], [NextSteps], Recording
             const row = [
                 new Date().toLocaleDateString(),

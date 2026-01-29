@@ -95,6 +95,7 @@ export async function POST(request: Request) {
                 }
 
                 if (leadData) {
+                    console.log('[Webhook] 📝 Analyzing Extracted LeadData:', JSON.stringify(leadData, null, 2));
                     console.log('[Webhook] Sending Emails via Resend...');
 
                     if (process.env.RESEND_API_KEY) {
@@ -117,12 +118,13 @@ export async function POST(request: Request) {
                         `;
 
                         // Using safe verified sender
-                        await resend.emails.send({
+                        const userMailOptions = {
                             from: 'Amy at Insight Public Sector <noreply@aifusionlabs.app>',
                             to: [recipient, 'aifusionlabs@gmail.com'],
                             subject: `Insight Public Sector: Next Steps`,
-                            html: emailBodyHtml
-                        });
+                        };
+                        console.log('[Webhook] 📤 Sending User Follow-up:', JSON.stringify(userMailOptions, null, 2));
+                        await resend.emails.send({ ...userMailOptions, html: emailBodyHtml });
                         console.log('✅ [Webhook] Sent "Amy" email to:', recipient);
 
 
@@ -190,12 +192,13 @@ export async function POST(request: Request) {
                         </div>
                         `;
 
-                        await resend.emails.send({
+                        const internalMailOptions = {
                             from: 'Insight Intelligence <alerts@aifusionlabs.app>',
                             to: 'aifusionlabs@gmail.com',
                             subject: `[INSIGHT PROSPECT] ${leadData.inquiry_type} - ${leadData.lead_name}`,
-                            html: internalBodyHtml
-                        });
+                        };
+                        console.log('[Webhook] 📤 Sending Internal Alert:', JSON.stringify(internalMailOptions, null, 2));
+                        await resend.emails.send({ ...internalMailOptions, html: internalBodyHtml });
                         console.log('✅ [Webhook] Sent Internal Alert.');
 
                         // C. Log to Google Sheets

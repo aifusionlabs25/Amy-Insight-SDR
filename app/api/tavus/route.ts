@@ -56,10 +56,14 @@ export async function POST(request: Request) {
             finalBaseUrl = `https://${process.env.VERCEL_URL}`;
         }
 
-        // FORCE PRODUCTION URL for Webhook (Bypass Env Var issues)
-        const callbackUrl = 'https://insight-amy.vercel.app/api/webhook';
+        // DYNAMIC Webhook Resolution
+        const host = request.headers.get('host');
+        const protocol = host?.includes('localhost') ? 'http' : 'https';
+        const currentDomain = `${protocol}://${host}`;
+        const callbackUrl = `${currentDomain}/api/webhook`;
 
-        console.log('[Setup] 🔗 Webhook Callback URL set to:', callbackUrl);
+        console.log('[Setup] 🔗 Calculated Dynamic Hub:', currentDomain);
+        console.log('[Setup] 🔗 Webhook Callback URL:', callbackUrl);
         console.log('[Setup] 🧩 Incoming Properties:', JSON.stringify(properties));
         console.log('[Setup] 👤 User Identity:', properties?.user_email ? `${properties.user_name} <${properties.user_email}>` : 'Anonymous');
 
@@ -89,6 +93,8 @@ export async function POST(request: Request) {
             memory_id: memory_id,
             callback_url: callbackUrl,
         };
+
+        console.log('[Tavus API] 📦 Final Request Body:', JSON.stringify(body, null, 2));
 
         // TTS Configuration is now handled via the Tavus Dashboard or persona settings.
         // We do NOT send 'layers' or 'tts' overrides here to avoid "Unknown field" errors.

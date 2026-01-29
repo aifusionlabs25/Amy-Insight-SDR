@@ -17,6 +17,8 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Name and email are required' }, { status: 400 });
         }
 
+        console.log('[Contact API] 📩 Incoming payload:', JSON.stringify({ name, email, phone, company, companyName, message }, null, 2));
+
         const emailHtml = `
 <!DOCTYPE html>
 <html>
@@ -50,20 +52,22 @@ export async function POST(request: Request) {
 
         const resend = getResendClient();
         if (resend) {
-            await resend.emails.send({
+            const adminMail = {
                 from: 'Amy Contact <noreply@aifusionlabs.app>',
                 to: ['aifusionlabs@gmail.com'],
                 subject: `Insight IT Discovery: ${name}`,
-                html: emailHtml,
-                replyTo: email,
-            });
+            };
+            console.log('[Contact API] 📤 Sending Admin Alert:', JSON.stringify(adminMail, null, 2));
+            await resend.emails.send({ ...adminMail, html: emailHtml, replyTo: email });
 
-            await resend.emails.send({
+            const userMail = {
                 from: 'Insight Public Sector <noreply@aifusionlabs.app>',
                 to: [email],
                 subject: `We received your inquiry`,
-                html: `<p>Hi ${name},<br><br>Thank you for reaching out to Insight Public Sector. We received your inquiry and a specialist will review it and contact you shortly.<br><br>Best regards,<br>Amy</p>`,
-            });
+            };
+            const userHtml = `<p>Hi ${name},<br><br>Thank you for reaching out to Insight Public Sector. We received your inquiry and a specialist will review it and contact you shortly.<br><br>Best regards,<br>Amy</p>`;
+            console.log('[Contact API] 📤 Sending User Receipt:', JSON.stringify(userMail, null, 2));
+            await resend.emails.send({ ...userMail, html: userHtml });
         }
 
         return NextResponse.json({ success: true, message: "Thank you! We'll be in touch soon." });
