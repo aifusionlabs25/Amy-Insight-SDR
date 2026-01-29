@@ -10,18 +10,24 @@ export interface LeadData {
 
     // Inquiry Details
     inquiry_type: string; // e.g., "Cloud Migration", "Cybersecurity", "Hardware Refresh"
-    pain_points: string[]; // e.g., "Current server obsolete", "Ransomware fears"
-    current_infrastructure: string; // e.g., "On-prem Exchange", "AWS Legacy"
+    pain_points: string[];
+    current_infrastructure: string;
+
+    // Hardware/Product specifics (NEW)
+    product_details: string; // Specific units, models, or quantities mentioned (e.g. "15x Lenovo ThinkPad X1 Carbon Gen 12")
+
+    // Conversation Summary (NEW)
+    summary: string; // A detailed 2-3 paragraph summary of the entire technical discussion
 
     // Qualification (The "Gold")
     budget: string;
     timeline: string;
-    competitors_or_blockers: string[]; // e.g., "Considering CDW", "Budget freeze until Q3"
-    qualification_status: string; // "Hot Lead", "Nurture", "Disqualified"
+    competitors_or_blockers: string[];
+    qualification_status: string;
 
     // Action Planning
-    amy_action: string; // What Agent did
-    recommended_next_steps: string[]; // e.g., "Schedule Assessment", "Send Whitepaper"
+    amy_action: string;
+    recommended_next_steps: string[];
 
     followUpEmail: string;
 }
@@ -46,43 +52,46 @@ export class OpenAIService {
         if (!transcript) return null;
 
         const systemPrompt = `
-        You are 'Amy', a Senior SDR for Insight Public Sector (Insight Enterprises). Your job is to extract IT/Tech needs and qualify public sector/enterprise leads from a conversation.
-
-        Analyze the transcript below and extract the key information into a JSON object.
-
-        GUIDELINES:
-        - **Be precise and fact-based.** Do not infer details not present.
-        - **inquiry_type**: Classify as "Cloud", "Cybersecurity", "Hardware/Devices", "AI/Data", or "Modern Workforce".
-        - **pain_points**: List specific technical or business challenges.
-        - **current_infrastructure**: What are they using now? (Legacy systems, specific vendors).
-        - **qualification_status**: "Qualified" (Decision maker + Budget/Need), "Nurture" (Research phase), or "Disqualified".
-        - **recommended_next_steps**: Concrete steps for the Account Executive (e.g. "Schedule Tech Check", "Send Quote").
+        You are 'Amy', a Senior SDR for Insight Public Sector (Insight Enterprises). 
+        Your job is to perform a deep analysis of an IT technical sales conversation.
         
-        - **followUpEmail**: Write a professional, concise, outcome-oriented follow-up email body (HTML text, <p>, <br>, <ul> only). 
-          - Address client by name.
-          - Context: "Great chatting about your [Topic] needs."
-          - Value Add: Mention one specific insight or solution relevant to them.
-          - Call to Action: "I'll have our [Topic] Specialist send over some specs."
-          - Sign off as "Amy".
+        Analyze the transcript below and extract comprehensive information into a JSON object.
+
+        CRITICAL: The user wants extreme detail. Do NOT be minimal.
+        
+        GUIDELINES:
+        - **SUMMARY**: Provide a detailed 2-3 paragraph breakdown of the conversation. Include specific technical requirements, the user's emotional state (if relevant), and any long-term goals mentioned.
+        - **PRODUCT_DETAILS**: List EVERY specific piece of hardware, software, part number, or model mentioned. Include quantities if discussed (e.g., "50x Cisco C9200L switches").
+        - **inquiry_type**: Classify accurately (Cloud, Cybersecurity, Hardware, AI, etc.).
+        - **pain_points**: Extract specific, detailed business or technical challenges.
+        - **current_infrastructure**: Detail exactly what they are replacing or integrating with.
+        - **followUpEmail**: Write a THOROUGH, professional follow-up email (HTML).
+            - Include a "Discussion Summary" section.
+            - List the specific products/units discussed.
+            - Clearly state the next steps.
+            - Use a warm, consultative tone.
+            - Sign off as "Amy".
 
         EXAMPLE OUTPUT FORMAT:
         {
             "lead_name": "Dave Miller",
             "lead_email": "dave@citygov.org",
             "lead_phone": "555-0199",
-            "inquiry_type": "Cybersecurity / Endpoint",
-            "pain_points": ["Recent phishing attacks", "Managing remote devices"],
-            "current_infrastructure": "McAfee on-prem, Windows 10",
-            "budget": "Fiscal Year 2026 funds available",
-            "timeline": "Needs solution by Q3",
-            "competitors_or_blockers": ["Looking at Crowdstike directly"],
+            "inquiry_type": "Hardware Refresh / Networking",
+            "pain_points": ["Current core switches are end-of-life", "Need more PoE capacity for new APs"],
+            "current_infrastructure": "Legacy Cisco 2960s with 100MB uplinks",
+            "product_details": "48x Cisco Catalyst 9200L (C9200L-48P-4G), 5x Core 9500 switches",
+            "summary": "Dave is looking to overhaul the city's switching fabric. He expressed frustration with the current 2960 performance and is prioritized for a Q3 rollout. We discussed the benefits of moving to the 9000 series for DNA licensing and automation.",
+            "budget": "State Grant already approved for $150k",
+            "timeline": "Deployment target: September 2026",
+            "competitors_or_blockers": ["Waiting on final quote from CDW to compare"],
             "qualification_status": "Qualified - Hot",
-            "amy_action": "Explained Insight's managed security wrapper",
+            "amy_action": "Opened Search Assist for Cisco 9200 and explained lead times.",
             "recommended_next_steps": [
-                "Schedule demo with Security Architect",
-                "Send 'Secure Public Sector' case study"
+                "Schedule deep-dive with Networking Specialist",
+                "Draft preliminary Bill of Materials (BOM)"
             ],
-            "followUpEmail": "<p>Hi Dave,</p><p>Thanks for discussing your endpoint security challenges today. Protecting remote devices is exactly where we're seeing public sector agencies focus right now.</p><p>I have looped in our Security Architect to prepare a comparison for your team.</p><p>Best,<br>Amy</p>"
+            "followUpEmail": "<p>Hi Dave,</p><p>It was a pleasure mapping out your network refresh today. I've noted the priority on the Catalyst 9200L series to support your new access point rollout.</p><h3>Conversation Summary</h3><p>We covered your transition from the legacy 2960 environment to a modern Cisco DNA architecture. I understand the criticality of hitting that September deadline to align with your grant funding.</p><h3>Discussed Solutions</h3><ul><li>Cisco Catalyst 9200L (48-port PoE+)</li><li>Cisco Catalyst 9500 (Core)</li></ul><p>Our Networking Specialist will reach out shortly to finalize the specs.</p><p>Best regards,<br>Amy</p>"
         }
         `;
 
@@ -118,6 +127,8 @@ export class OpenAIService {
                 inquiry_type: "General Inquiry",
                 pain_points: ["Unknown"],
                 current_infrastructure: "Unknown",
+                product_details: "N/A",
+                summary: "Transcription processing initiated.",
                 budget: "Unknown",
                 timeline: "Unknown",
                 competitors_or_blockers: [],

@@ -153,6 +153,16 @@ export async function POST(request: Request) {
                             
                             <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;">
 
+                            <h3 style="color: #111;">🔍 Executive Summary</h3>
+                            <div style="background: #fff; padding: 15px 20px; border-radius: 4px; border: 1px solid #e5e5e5; line-height: 1.6;">
+                                ${leadData.summary || 'Summary not available.'}
+                            </div>
+
+                            <h3 style="color: #111;">📦 Hardware / Software Details</h3>
+                            <div style="background: #f0fdf4; padding: 15px 20px; border-radius: 4px; border: 1px solid #bbf7d0; color: #166534; font-weight: bold;">
+                                ${leadData.product_details || 'No specific units mentioned.'}
+                            </div>
+
                             <h3 style="color: #111;">🔥 Pain Points & Needs</h3>
                             <ul style="background: #eef2ff; padding: 15px 20px; border-radius: 4px; border: 1px solid #c7d2fe;">
                                 ${(leadData.pain_points || []).length > 0 ? (leadData.pain_points || []).map((p: string) => `<li>${p}</li>`).join('') : '<li>No specific pain points mentioned</li>'}
