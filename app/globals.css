@@ -187,16 +187,9 @@ body::before {
     -webkit-text-fill-color: transparent;
   }
 
-  /* Centering Stage */
-  .gd-stage {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+  /* Centering Stage - Removed redundant utility */
+  .text-white {
+    color: white;
   }
 
   /* Bagde */
