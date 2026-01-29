@@ -76,15 +76,20 @@ export const SearchAssist: React.FC<{ isOpen: boolean; onClose: () => void; onOp
     // Daily App Message Tool Hook (Tavus V2)
     useAppMessage({
         onAppMessage: (event) => {
+            console.log('[SearchAssist] 🔔 Incoming Daily App Message:', event);
             const data = (event as any).data;
+
             // Tavus V2 tool_call event
-            if (data.event === 'tool_call' && data.name === 'search_assist') {
+            if (data?.event === 'tool_call' && data?.name === 'search_assist') {
                 const queryText = data.arguments?.query_text;
+                console.log('[SearchAssist] 🎯 AI Triggered Search:', queryText);
                 if (queryText) {
                     onOpen();
                     setQuery(queryText);
                     handleSearch(queryText);
                 }
+            } else if (data?.event === 'tool_call') {
+                console.log('[SearchAssist] ⚠️ Other Tool Call Received:', data.name);
             }
         },
     });
