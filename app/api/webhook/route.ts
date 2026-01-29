@@ -130,19 +130,19 @@ export async function POST(request: Request) {
                         const internalBodyHtml = `
                         <div style="font-family: sans-serif; padding: 20px; line-height: 1.5; color: #333; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;">
                             <div style="border-bottom: 2px solid #AE0A46; padding-bottom: 10px; margin-bottom: 15px;">
-                                <h2 style="color: #AE0A46; margin: 0;">🚀 New Lead Intake</h2>
+                                <h2 style="color: #AE0A46; margin: 0;">🚀 Insight Prospect Analysis</h2>
                                 <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Conversation ID: ${conversation_id}</p>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                 <div>
-                                    <h3 style="margin-bottom: 10px; color: #111;">👤 Prospect</h3>
+                                    <h3 style="margin-bottom: 10px; color: #111;">👤 Account Info</h3>
                                     <p style="margin: 5px 0;"><strong>Name:</strong> ${leadData.lead_name}</p>
                                     <p style="margin: 5px 0;"><strong>Email:</strong> ${leadData.lead_email}</p>
                                     <p style="margin: 5px 0;"><strong>Phone:</strong> ${leadData.lead_phone}</p>
                                 </div>
                                 <div>
-                                    <h3 style="margin-bottom: 10px; color: #111;">💼 Inquiry</h3>
+                                    <h3 style="margin-bottom: 10px; color: #111;">💼 Project Specs</h3>
                                     <p style="margin: 5px 0;"><strong>Type:</strong> ${leadData.inquiry_type}</p>
                                     <p style="margin: 5px 0;"><strong>Status:</strong> ${leadData.qualification_status}</p>
                                     <p style="margin: 5px 0;"><strong>Current Infra:</strong> ${leadData.current_infrastructure}</p>
@@ -191,9 +191,9 @@ export async function POST(request: Request) {
                         `;
 
                         await resend.emails.send({
-                            from: 'Insight Intake <alerts@aifusionlabs.app>',
+                            from: 'Insight Intelligence <alerts@aifusionlabs.app>',
                             to: 'aifusionlabs@gmail.com',
-                            subject: `[NEW LEAD] ${leadData.inquiry_type} - ${leadData.lead_name}`,
+                            subject: `[INSIGHT PROSPECT] ${leadData.inquiry_type} - ${leadData.lead_name}`,
                             html: internalBodyHtml
                         });
                         console.log('✅ [Webhook] Sent Internal Alert.');

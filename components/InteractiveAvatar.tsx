@@ -184,8 +184,8 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 </header>
 
                 {/* MAIN */}
-                <main className="h-full w-full pt-[72px]">
-                    <section className="flex h-[calc(100vh-72px)] w-full items-center justify-center px-6">
+                <main className={conversation ? "h-full w-full pt-[160px]" : "h-full w-full pt-[72px]"}>
+                    <section className={conversation ? "flex h-[calc(100vh-160px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
                         <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%]'}>
                             {conversation ? (
                                 <div className="gd-stage">
