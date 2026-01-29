@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-clean.png" alt="Insight Enterprises" className="h-12 w-auto object-contain" />
+                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-12 w-auto object-contain" />
                             </a>
                         </div>
 
@@ -186,7 +186,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 {/* MAIN */}
                 <main className="h-full w-full pt-[72px]">
                     <section className="flex h-[calc(100vh-72px)] w-full items-center justify-center px-6">
-                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10'}>
+                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform -translate-y-[12%]'}>
                             {conversation ? (
                                 <div className="gd-stage">
                                     <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden">
