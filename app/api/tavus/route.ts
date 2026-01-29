@@ -90,9 +90,9 @@ export async function POST(request: Request) {
                         description: "Search hardware inventory for specific products, models, or part numbers. Call this when you want to look up hardware inventory or specifications.",
                         parameters: {
                             type: "object",
-                            required: ["query_text"],
+                            required: ["query"],
                             properties: {
-                                query_text: {
+                                query: {
                                     type: "string",
                                     description: "Product name or part number (e.g. 'Lenovo ThinkPad', 'Cisco Switch', 'FG-60F')"
                                 }
