@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-24 w-auto object-contain" />
+                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className={`${conversation ? 'h-16' : 'h-24'} w-auto object-contain`} />
                             </a>
                         </div>
 
@@ -186,7 +186,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 {/* MAIN */}
                 <main className={conversation ? "h-full w-full pt-[160px]" : "h-full w-full pt-[72px]"}>
                     <section className={conversation ? "flex h-[calc(100vh-160px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
-                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%]'}>
+                        <div className={conversation ? 'w-full max-w-6xl mx-auto' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
                             {conversation ? (
                                 <div className="gd-stage">
                                     <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden">
@@ -259,7 +259,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-sm px-6">
                         <div className="gd-glass w-full max-w-md p-7 md:p-8 border border-slate-700">
                             <div className="mb-5 flex items-center justify-between">
-                                <h3 className="text-xl font-serif text-white">Contact Firm</h3>
+                                <h3 className="text-xl font-serif text-white">Contact Insight</h3>
                                 <button onClick={() => setShowContactForm(false)} className="gd-btn p-2" type="button">
                                     <IconX className="h-5 w-5" />
                                 </button>

@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 <body>
     <div class="container">
         <div class="header">
-            <h2>🔐 Knowles Law: Access Request</h2>
+            <h2>🔐 Insight Public Sector: Access Request</h2>
         </div>
         <div class="content">
             <div class="field"><span class="label">Name:</span> ${name}</div>
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
             <div class="field"><span class="label">Company:</span> ${company || 'N/A'}</div>
             <div class="field"><span class="label">Website:</span> ${website || 'N/A'}</div>
             <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e5e7eb;">
-            <p style="font-size: 12px; color: #666;">Submitted via James Demo Access Gate.</p>
+            <p style="font-size: 12px; color: #666;">Submitted via Amy Demo Access Gate.</p>
         </div>
     </div>
 </body>
@@ -60,21 +60,21 @@ export async function POST(request: Request) {
             await resend.emails.send({
                 from: 'Access Gate <noreply@aifusionlabs.app>',
                 to: ['aifusionlabs@gmail.com'],
-                subject: `Access Request: ${name} (Knowles Law Demo)`,
+                subject: `Access Request: ${name} (Insight Demo)`,
                 html: adminHtml,
                 replyTo: email,
             });
 
             // 2. Send User Confirmation
             await resend.emails.send({
-                from: 'Knowles Law Firm <noreply@aifusionlabs.app>',
+                from: 'Insight Public Sector <noreply@aifusionlabs.app>',
                 to: [email],
                 subject: 'We received your access request',
                 html: `
 <p>Hi ${name},</p>
-<p>Thanks for your interest in the James Interactive Demo (Knowles Law Firm).</p>
+<p>Thanks for your interest in the Amy Interactive Demo (Insight Public Sector).</p>
 <p>We have received your request and our team will review it shortly. If approved, you will receive an access code via email.</p>
-<p>Best,<br>Knowles Law Firm AI Team</p>
+<p>Best regards,<br>Insight AI Team</p>
 `
             });
         } else {

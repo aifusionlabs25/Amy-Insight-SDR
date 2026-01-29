@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 <body>
     <div class="container">
         <div class="header">
-            <h2 style="margin: 0;">⚖️ New Lead from James (Knowles Law)</h2>
+            <h2 style="margin: 0;">🚀 IT Discovery Info - Insight</h2>
         </div>
         <div class="content">
             <div class="field"><span class="label">Name:</span> <span class="value">${name}</span></div>
@@ -51,18 +51,18 @@ export async function POST(request: Request) {
         const resend = getResendClient();
         if (resend) {
             await resend.emails.send({
-                from: 'James Contact <noreply@aifusionlabs.app>',
+                from: 'Amy Contact <noreply@aifusionlabs.app>',
                 to: ['aifusionlabs@gmail.com'],
-                subject: `Legal Lead: ${name}`,
+                subject: `Insight IT Discovery: ${name}`,
                 html: emailHtml,
                 replyTo: email,
             });
 
             await resend.emails.send({
-                from: 'Knowles Law Firm <noreply@aifusionlabs.app>',
+                from: 'Insight Public Sector <noreply@aifusionlabs.app>',
                 to: [email],
-                subject: `We received your message`,
-                html: `<p>Hi ${name},<br><br>We received your inquiry. A member of our legal team will review it and contact you shortly.<br><br>Best,<br>Knowles Law Firm</p>`,
+                subject: `We received your inquiry`,
+                html: `<p>Hi ${name},<br><br>Thank you for reaching out to Insight Public Sector. We received your inquiry and a specialist will review it and contact you shortly.<br><br>Best regards,<br>Amy</p>`,
             });
         }
 

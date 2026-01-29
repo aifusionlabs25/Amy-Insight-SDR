@@ -180,11 +180,23 @@ body::before {
   }
 
   /* Gradient Text - Insight Brand */
-  .gd-gradient-text {
-    background: linear-gradient(90deg, rgb(var(--gd-gold)), rgb(var(--gd-blue)));
+  .text-gradient {
+    background: linear-gradient(135deg, #AE0A46 0%, #7B1352 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Centering Stage */
+  .gd-stage {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Bagde */

@@ -22,12 +22,11 @@ function cleanGreetingForTTS(greeting: string): string {
 
 // Default KB Tags
 const DEFAULT_KB_TAGS = [
-    'knowles-firm-overview',
-    'knowles-attorneys',
-    'knowles-practice-areas',
-    'knowles-case-results',
-    'knowles-intake-process',
-    'personal-injury-faq'
+    'insight-overview',
+    'it-solutions',
+    'cloud-migration',
+    'cybersecurity-services',
+    'modern-workplace'
 ];
 
 export async function POST(request: Request) {
@@ -58,7 +57,7 @@ export async function POST(request: Request) {
         }
 
         // FORCE PRODUCTION URL for Webhook (Bypass Env Var issues)
-        const callbackUrl = 'https://james.aifusionlabs.app/api/webhook';
+        const callbackUrl = 'https://insight-amy.vercel.app/api/webhook';
 
         console.log('[Setup] 🔗 Webhook Callback URL set to:', callbackUrl);
         console.log('[Setup] 🧩 Incoming Properties:', JSON.stringify(properties));
@@ -76,7 +75,7 @@ export async function POST(request: Request) {
         const body: any = {
             persona_id: serverPersonaId,
             custom_greeting: cleanedGreeting,
-            conversation_name: conversation_name || "Amy Intake Session",
+            conversation_name: conversation_name || "Insight Discovery Session",
             conversational_context: AMY_SYSTEM_PROMPT,
             document_tags: finalTags,
             properties: {
