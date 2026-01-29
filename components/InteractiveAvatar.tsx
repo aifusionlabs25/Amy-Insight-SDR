@@ -151,12 +151,12 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 {/* ShellBackground removed for seamless gradient */}
 
                 {/* HEADER */}
-                <header className="fixed left-0 top-0 z-[300] w-full px-6 md:px-10 py-4">
+                <header className="fixed left-0 top-0 z-[300] w-full px-6 md:px-10 py-2">
                     <div className="mx-auto flex max-w-7xl items-center justify-between">
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className={`${conversation ? 'h-20' : 'h-24'} w-auto object-contain`} />
+                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className={`${conversation ? 'h-16' : 'h-24'} w-auto object-contain`} />
                             </a>
                         </div>
 
@@ -184,9 +184,9 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 </header>
 
                 {/* MAIN */}
-                <main className={conversation ? "h-full w-full pt-[160px]" : "h-full w-full pt-[72px]"}>
-                    <section className={conversation ? "flex h-[calc(100vh-160px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
-                        <div className={conversation ? 'w-full max-w-6xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
+                <main className={conversation ? "h-full w-full pt-[110px]" : "h-full w-full pt-[72px]"}>
+                    <section className={conversation ? "flex h-[calc(100vh-110px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
+                        <div className={conversation ? 'w-full max-w-5xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
                             {conversation ? (
                                 <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden w-full">
                                     <Conversation onLeave={endConversation} conversationUrl={conversation.conversation_url} />
