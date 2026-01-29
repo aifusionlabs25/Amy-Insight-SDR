@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
 
         // Clean the greeting
-        const rawGreeting = custom_greeting || "Hi — this is Amy with Insight Enterprises. Thanks for reaching out. Before I connect you with the right team, can I ask a couple quick questions?";
+        const rawGreeting = custom_greeting || "Hi, I'm Amy with Insight. Thanks for reaching out. I'm here to help connect you with the right specialists. What is top of mind for you today?";
         const cleanedGreeting = cleanGreetingForTTS(rawGreeting);
 
         // Merge default tags with any custom tags
