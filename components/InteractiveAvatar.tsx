@@ -265,7 +265,6 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                     </section>
                 </main>
 
-                {/* CONTACT MODAL */}
                 {showContactForm && (
                     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-sm px-6">
                         <div className="gd-glass w-full max-w-md p-7 md:p-8 border border-slate-700">
@@ -296,6 +295,13 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         </div>
                     </div>
                 )}
+
+                {/* SEARCH ASSIST DRAWER */}
+                <SearchAssist
+                    isOpen={isSearchOpen}
+                    onClose={() => setIsSearchOpen(false)}
+                    onOpen={() => setIsSearchOpen(true)}
+                />
             </div>
         </CVIProvider>
     );
