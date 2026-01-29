@@ -184,9 +184,9 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 </header>
 
                 {/* MAIN */}
-                <main className={conversation ? "h-full w-full pt-[110px]" : "h-full w-full pt-[72px]"}>
-                    <section className={conversation ? "flex h-[calc(100vh-110px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
-                        <div className={conversation ? 'w-full max-w-5xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
+                <main className={conversation ? "h-full w-full pt-[90px]" : "h-full w-full pt-[72px]"}>
+                    <section className={conversation ? "flex h-[calc(100vh-90px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
+                        <div className={conversation ? 'w-full max-w-4xl' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
                             {conversation ? (
                                 <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden w-full">
                                     <Conversation onLeave={endConversation} conversationUrl={conversation.conversation_url} />
