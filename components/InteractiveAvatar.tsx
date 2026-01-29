@@ -52,26 +52,36 @@ function InteractiveAvatarInner({ userName, userEmail }: InteractiveAvatarProps)
     };
 
     // Central Hub for Search Trigger
-    // This hook NOW WORKS because it is a child of CVIProvider/DailyProvider
     useAppMessage({
         onAppMessage: (event) => {
-            console.log('[AvatarHub] 🔔 Incoming Message:', event);
-            const data = (event as any).data;
-            if (data?.event === 'tool_call' && data?.name === 'search_assist') {
-                // Support all potential parameter names from different AI versions/dashboard settings
-                const query = data.arguments?.query_text || data.arguments?.query || data.arguments?.queryText;
+            console.log('[AvatarHub] 🔔 Message Received:', {
+                from: (event as any).fromId,
+                data: (event as any).data
+            });
 
-                console.log('[AvatarHub] 🎯 Search assist triggered:', query);
+            const data = (event as any).data;
+
+            if (data?.event === 'tool_call' && data?.name === 'search_assist') {
+                const args = data.arguments || {};
+                const query = args.query_text || args.query || args.queryText;
+
+                console.log('[AvatarHub] 🎯 Search assist detected. Query:', query);
+
                 if (query) {
                     setIsSearchOpen(true);
-                    // Use a slightly longer delay and a retry mechanism for mounting
+
+                    // Robust Retry Mechanism
                     let attempts = 0;
                     const triggerInternal = () => {
                         if ((window as any).amySearchAssist) {
+                            console.log('[AvatarHub] ✅ Panel ready. Triggering search.');
                             (window as any).amySearchAssist(query);
-                        } else if (attempts < 5) {
+                        } else if (attempts < 10) {
                             attempts++;
-                            setTimeout(triggerInternal, 100);
+                            console.log(`[AvatarHub] ⏳ Waiting for panel mount (Attempt ${attempts})...`);
+                            setTimeout(triggerInternal, 150);
+                        } else {
+                            console.error('[AvatarHub] ❌ Panel failed to mount after 1.5s');
                         }
                     };
                     setTimeout(triggerInternal, 50);
