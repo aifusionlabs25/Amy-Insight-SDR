@@ -5,6 +5,7 @@ import { CVIProvider } from '@/app/components/cvi/components/cvi-provider';
 import { Conversation } from '@/app/components/cvi/components/conversation';
 import { SearchAssist } from './SearchAssist';
 import { IconSearch } from '@tabler/icons-react';
+import { useAppMessage } from '@daily-co/daily-react';
 
 type TavusConversation = {
     conversation_id: string;
@@ -25,27 +26,16 @@ function IconX(props: React.SVGProps<SVGSVGElement>) {
     return <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>;
 }
 
-function ShellBackground() {
-    return (
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-            {/* Deep Navy/Black Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#020617] to-black" />
-            {/* Gold Glows */}
-            <div className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 h-[780px] w-[780px] rounded-full bg-[rgb(var(--gd-gold))]/10 blur-[120px]" />
-            <div className="absolute right-[-180px] bottom-[-220px] h-[640px] w-[840px] rounded-full bg-blue-900/20 blur-[130px]" />
-            <div className="absolute inset-0 gd-grid opacity-[0.3]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_70%,rgba(0,0,0,0.9)_100%)]" />
-        </div>
-    );
-}
-
 // Added props for user identification
 interface InteractiveAvatarProps {
     userName?: string;
     userEmail?: string;
 }
 
-export default function InteractiveAvatar({ userName, userEmail }: InteractiveAvatarProps) {
+/**
+ * Inner component that can safely use Daily hooks
+ */
+function InteractiveAvatarInner({ userName, userEmail }: InteractiveAvatarProps) {
     const [conversation, setConversation] = useState<TavusConversation | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -61,6 +51,28 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
         window.open('https://www.insight.com/', '_blank', 'width=1000,height=800');
     };
 
+    // Central Hub for Search Trigger
+    // This hook NOW WORKS because it is a child of CVIProvider/DailyProvider
+    useAppMessage({
+        onAppMessage: (event) => {
+            console.log('[AvatarHub] 🔔 Incoming Message:', event);
+            const data = (event as any).data;
+            if (data?.event === 'tool_call' && data?.name === 'search_assist') {
+                const query = data.arguments?.query_text || data.arguments?.query;
+                console.log('[AvatarHub] 🎯 Search assist triggered:', query);
+                if (query) {
+                    setIsSearchOpen(true);
+                    // Use a short delay to ensure the panel is mounted if it wasn't
+                    setTimeout(() => {
+                        if ((window as any).amySearchAssist) {
+                            (window as any).amySearchAssist(query);
+                        }
+                    }, 100);
+                }
+            }
+        }
+    });
+
     const startConversation = async () => {
         setLoading(true);
         setError('');
@@ -70,7 +82,6 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     audio_only: false,
-                    // Pass user identity for backend tools/webhooks
                     properties: {
                         user_name: userName,
                         user_email: userEmail
@@ -105,10 +116,6 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
         }
     };
 
-    const handleConversationLeave = useCallback(() => {
-        setConversation(null);
-    }, []);
-
     const handleContactSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setContactSubmitting(true);
@@ -133,7 +140,6 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
         }
     };
 
-    // Cleanup on unmount
     useEffect(() => {
         const handleBeforeUnload = () => {
             if (!conversation?.conversation_id) return;
@@ -149,160 +155,165 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
     }, [conversation]);
 
     return (
-        <CVIProvider>
-            <div className="relative h-screen w-full overflow-hidden text-white selection:bg-[rgb(var(--gd-gold))]/30">
-                {/* ShellBackground removed for seamless gradient */}
+        <div className="relative h-screen w-full overflow-hidden text-white selection:bg-[rgb(var(--gd-gold))]/30">
+            {/* HEADER */}
+            <header className="fixed left-0 top-0 z-[300] w-full px-6 md:px-10 py-2">
+                <div className="mx-auto flex max-w-7xl items-center justify-between">
+                    <div className="flex items-center gap-3 z-[1000] relative">
+                        <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                            <img src="/insight-logo-final.png" alt="Insight Enterprises" className={`${conversation ? 'h-16' : 'h-24'} w-auto object-contain`} />
+                        </a>
+                    </div>
 
-                {/* HEADER */}
-                <header className="fixed left-0 top-0 z-[300] w-full px-6 md:px-10 py-2">
-                    <div className="mx-auto flex max-w-7xl items-center justify-between">
-                        <div className="flex items-center gap-3 z-[1000] relative">
-                            {/* Image Logo */}
-                            <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className={`${conversation ? 'h-16' : 'h-24'} w-auto object-contain`} />
-                            </a>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            {!conversation && (
-                                <>
-                                    <button onClick={openCalendly} className="gd-btn" type="button">
-                                        <IconCalendar className="h-4 w-4 text-[rgb(var(--gd-gold))]" />
-                                        <span>Book Consultation</span>
-                                    </button>
-                                    <button onClick={() => setShowContactForm(true)} className="gd-btn" type="button">
-                                        <IconMail className="h-4 w-4" />
-                                        <span>Contact</span>
-                                    </button>
-                                </>
-                            )}
-                            {conversation && (
-                                <button onClick={endConversation} className="gd-btn gd-btn-danger" type="button">
-                                    <IconX className="h-5 w-5" />
-                                    <span>End Session</span>
+                    <div className="flex items-center gap-3">
+                        {!conversation && (
+                            <>
+                                <button onClick={openCalendly} className="gd-btn" type="button">
+                                    <IconCalendar className="h-4 w-4 text-[rgb(var(--gd-gold))]" />
+                                    <span>Book Consultation</span>
                                 </button>
-                            )}
-                            <button
-                                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                className={`gd-btn group ${isSearchOpen ? 'bg-[rgb(var(--gd-gold))] text-slate-950' : ''}`}
-                                type="button"
-                                title="Search Assist"
-                            >
-                                <IconSearch className={`h-5 w-5 ${isSearchOpen ? 'text-slate-950' : 'text-[rgb(var(--gd-gold))]'}`} />
-                                <span className="hidden md:inline">Search Assist</span>
-                                {!isSearchOpen && <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-slate-900 animate-pulse" />}
+                                <button onClick={() => setShowContactForm(true)} className="gd-btn" type="button">
+                                    <IconMail className="h-4 w-4" />
+                                    <span>Contact</span>
+                                </button>
+                            </>
+                        )}
+                        {conversation && (
+                            <button onClick={endConversation} className="gd-btn gd-btn-danger" type="button">
+                                <IconX className="h-5 w-5" />
+                                <span>End Session</span>
+                            </button>
+                        )}
+                        <button
+                            onClick={() => setIsSearchOpen(!isSearchOpen)}
+                            className={`gd-btn group ${isSearchOpen ? 'bg-[rgb(var(--gd-gold))] text-slate-950' : ''}`}
+                            type="button"
+                            title="Search Assist"
+                        >
+                            <IconSearch className={`h-5 w-5 ${isSearchOpen ? 'text-slate-950' : 'text-[rgb(var(--gd-gold))]'}`} />
+                            <span className="hidden md:inline">Search Assist</span>
+                            {!isSearchOpen && <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-slate-900 animate-pulse" />}
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {/* MAIN */}
+            <main className={conversation ? "h-full w-full pt-[90px]" : "h-full w-full pt-[72px]"}>
+                <section className={conversation ? "flex h-[calc(100vh-90px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
+                    <div className={conversation ? 'w-full max-w-4xl mx-auto' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
+                        {conversation ? (
+                            <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden w-full">
+                                <Conversation onLeave={endConversation} conversationUrl={conversation.conversation_url} />
+                            </div>
+                        ) : (
+                            <div className="mx-auto flex flex-col items-center justify-between text-center flex-1 py-10">
+                                <div className="flex flex-col items-center mt-6">
+                                    <div className="relative mb-8 gd-float">
+                                        <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
+                                        <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30 overflow-hidden">
+                                            <img
+                                                src="/amy.png"
+                                                alt="Amy Headshot"
+                                                className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover object-top scale-[1.1] opacity-95"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
+                                            Meet <span className="text-white font-semibold">Amy</span>
+                                        </h1>
+                                        <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
+                                            Insight Public Sector SDR
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col items-center gap-3 mt-10">
+                                    <button
+                                        onClick={startConversation}
+                                        disabled={loading}
+                                        className="gd-btn px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10 hover:shadow-[0_0_30px_rgba(var(--gd-gold),0.4)] transition-all duration-300"
+                                        type="button"
+                                    >
+                                        <span>{loading ? 'Connecting...' : 'Speak with Amy'}</span>
+                                        {!loading && <IconArrowRight className="h-5 w-5" />}
+                                    </button>
+
+                                    {error && (
+                                        <div className="gd-badge border-red-500/25 bg-red-500/10 text-red-200 mt-4">
+                                            <span className="h-2 w-2 rounded-full bg-red-400" />
+                                            <span className="text-sm">{error}</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="flex flex-col items-center mt-16">
+                                    <p className="text-xs text-slate-400 max-w-md font-medium tracking-wide">
+                                        Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
+                                    </p>
+                                    <footer className="mt-8 text-center px-4 pointer-events-none">
+                                        <p className="text-[10px] text-black/70 uppercase tracking-widest">
+                                            Insight Public Sector • SDR X-Agent (Amy v14.2) • Internal Demo Only
+                                        </p>
+                                    </footer>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            </main>
+
+            {showContactForm && (
+                <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-sm px-6">
+                    <div className="gd-glass w-full max-w-md p-7 md:p-8 border border-slate-700">
+                        <div className="mb-5 flex items-center justify-between">
+                            <h3 className="text-xl font-serif text-white">Contact Insight</h3>
+                            <button onClick={() => setShowContactForm(false)} className="gd-btn p-2" type="button">
+                                <IconX className="h-5 w-5" />
                             </button>
                         </div>
-                    </div>
-                </header>
 
-                {/* MAIN */}
-                <main className={conversation ? "h-full w-full pt-[90px]" : "h-full w-full pt-[72px]"}>
-                    <section className={conversation ? "flex h-[calc(100vh-90px)] w-full items-center justify-center px-6" : "flex h-[calc(100vh-72px)] w-full items-center justify-center px-6"}>
-                        <div className={conversation ? 'w-full max-w-4xl mx-auto' : 'w-full max-w-4xl h-full flex flex-col items-center justify-center py-10 transform translate-y-[-2%] mx-auto'}>
-                            {conversation ? (
-                                <div className="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden w-full">
-                                    <Conversation onLeave={endConversation} conversationUrl={conversation.conversation_url} />
-                                </div>
-                            ) : (
-                                <div className="mx-auto flex flex-col items-center justify-between text-center flex-1 py-10">
-                                    <div className="flex flex-col items-center mt-6">
-                                        <div className="relative mb-8 gd-float">
-                                            <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
-                                            <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30 overflow-hidden">
-                                                <img
-                                                    src="/amy.png"
-                                                    alt="Amy Headshot"
-                                                    className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover object-top scale-[1.1] opacity-95"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-4">
-                                            <h1 className="text-balance text-4xl md:text-5xl font-light tracking-tight font-serif">
-                                                Meet <span className="text-white font-semibold">Amy</span>
-                                            </h1>
-                                            <p className="mt-4 max-w-xl text-lg text-slate-300 leading-relaxed">
-                                                Insight Public Sector SDR
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col items-center gap-3 mt-10">
-                                        <button
-                                            onClick={startConversation}
-                                            disabled={loading}
-                                            className="gd-btn px-8 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10 hover:shadow-[0_0_30px_rgba(var(--gd-gold),0.4)] transition-all duration-300"
-                                            type="button"
-                                        >
-                                            <span>{loading ? 'Connecting...' : 'Speak with Amy'}</span>
-                                            {!loading && <IconArrowRight className="h-5 w-5" />}
-                                        </button>
-
-                                        {error && (
-                                            <div className="gd-badge border-red-500/25 bg-red-500/10 text-red-200 mt-4">
-                                                <span className="h-2 w-2 rounded-full bg-red-400" />
-                                                <span className="text-sm">{error}</span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="flex flex-col items-center mt-16">
-                                        <p className="text-xs text-slate-400 max-w-md font-medium tracking-wide">
-                                            Amy is an AI agent. Information provided is for discovery purposes only and does not constitute technical or legal advice.
-                                        </p>
-
-                                        {/* Footer - Only on Landing */}
-                                        <footer className="mt-8 text-center px-4 pointer-events-none">
-                                            <p className="text-[10px] text-black/70 uppercase tracking-widest">
-                                                Insight Public Sector • SDR X-Agent (Amy v1.0) • Internal Demo Only
-                                            </p>
-                                        </footer>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </section>
-                </main>
-
-                {showContactForm && (
-                    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-sm px-6">
-                        <div className="gd-glass w-full max-w-md p-7 md:p-8 border border-slate-700">
-                            <div className="mb-5 flex items-center justify-between">
-                                <h3 className="text-xl font-serif text-white">Contact Insight</h3>
-                                <button onClick={() => setShowContactForm(false)} className="gd-btn p-2" type="button">
-                                    <IconX className="h-5 w-5" />
-                                </button>
+                        {contactSuccess ? (
+                            <div className="gd-badge border-[rgb(var(--gd-gold))]/25 bg-[rgb(var(--gd-gold))]/10 text-pink-100">
+                                <span className="h-2 w-2 rounded-full bg-[rgb(var(--gd-gold))]" />
+                                <span className="text-sm">Message received. We will contact you.</span>
                             </div>
+                        ) : (
+                            <form onSubmit={handleContactSubmit} className="space-y-4">
+                                <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Your Name" value={contactForm.name} onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} required />
+                                <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Email Address" type="email" value={contactForm.email} onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} required />
+                                <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Phone Number" value={contactForm.phone} onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })} />
+                                <textarea className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none min-h-[100px]" placeholder="How can we help?" value={contactForm.message} onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} required />
 
-                            {contactSuccess ? (
-                                <div className="gd-badge border-[rgb(var(--gd-gold))]/25 bg-[rgb(var(--gd-gold))]/10 text-pink-100">
-                                    <span className="h-2 w-2 rounded-full bg-[rgb(var(--gd-gold))]" />
-                                    <span className="text-sm">Message received. We will contact you.</span>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleContactSubmit} className="space-y-4">
-                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Your Name" value={contactForm.name} onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} required />
-                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Email Address" type="email" value={contactForm.email} onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} required />
-                                    <input className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none" placeholder="Phone Number" value={contactForm.phone} onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })} />
-                                    <textarea className="w-full rounded bg-slate-950/50 border border-slate-700 px-4 py-3 text-white focus:border-[rgb(var(--gd-gold))] outline-none min-h-[100px]" placeholder="How can we help?" value={contactForm.message} onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} required />
-
-                                    <button type="submit" disabled={contactSubmitting} className="gd-btn gd-btn-primary w-full py-3 disabled:opacity-50 text-white">
-                                        {contactSubmitting ? 'Sending...' : 'Send Message'}
-                                    </button>
-                                </form>
-                            )}
-                        </div>
+                                <button type="submit" disabled={contactSubmitting} className="gd-btn gd-btn-primary w-full py-3 disabled:opacity-50 text-white">
+                                    {contactSubmitting ? 'Sending...' : 'Send Message'}
+                                </button>
+                            </form>
+                        )}
                     </div>
-                )}
+                </div>
+            )}
 
-                {/* SEARCH ASSIST DRAWER */}
-                <SearchAssist
-                    isOpen={isSearchOpen}
-                    onClose={() => setIsSearchOpen(false)}
-                    onOpen={() => setIsSearchOpen(true)}
-                />
-            </div>
+            {/* SEARCH ASSIST DRAWER */}
+            <SearchAssist
+                isOpen={isSearchOpen}
+                onClose={() => setIsSearchOpen(false)}
+                onOpen={() => setIsSearchOpen(true)}
+            />
+        </div>
+    );
+}
+
+/**
+ * Main Export - Wraps everything in CVIProvider
+ * This ensures InteractiveAvatarInner can use Daily hooks.
+ */
+export default function InteractiveAvatar(props: InteractiveAvatarProps) {
+    return (
+        <CVIProvider>
+            <InteractiveAvatarInner {...props} />
         </CVIProvider>
     );
 }

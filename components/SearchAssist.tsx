@@ -11,7 +11,6 @@ import {
     IconPackage,
     IconSettings
 } from '@tabler/icons-react';
-import { useAppMessage } from "@daily-co/daily-react";
 
 interface SearchMatch {
     id: string;
@@ -73,28 +72,6 @@ export const SearchAssist: React.FC<{ isOpen: boolean; onClose: () => void; onOp
         }
     }, [query, autoDetect]);
 
-    // Daily App Message Tool Hook (Tavus V2)
-    useAppMessage({
-        onAppMessage: (event) => {
-            console.log('[SearchAssist] 🔔 Incoming Daily App Message:', event);
-            const data = (event as any).data;
-
-            // Tavus V2 tool_call event
-            if (data?.event === 'tool_call' && data?.name === 'search_assist') {
-                // Support both 'query_text' (persona) and 'query' (AI guess)
-                const queryText = data.arguments?.query_text || data.arguments?.query;
-
-                console.log('[SearchAssist] 🎯 AI Triggered Search:', queryText);
-                if (queryText) {
-                    onOpen();
-                    setQuery(queryText);
-                    handleSearch(queryText);
-                }
-            } else if (data?.event === 'tool_call') {
-                console.log('[SearchAssist] ⚠️ Other Tool Call Received:', data.name);
-            }
-        },
-    });
 
     // Amy Hook Integration (Global window access)
     useEffect(() => {
