@@ -82,11 +82,31 @@ export async function POST(request: Request) {
             conversation_name: conversation_name || "Insight Discovery Session",
             conversational_context: AMY_SYSTEM_PROMPT,
             document_tags: finalTags,
+            tools: [
+                {
+                    type: "function",
+                    function: {
+                        name: "search_assist",
+                        description: "Search hardware inventory for specific products, models, or part numbers. Call this when you want to look up hardware inventory or specifications.",
+                        parameters: {
+                            type: "object",
+                            required: ["query_text"],
+                            properties: {
+                                query_text: {
+                                    type: "string",
+                                    description: "Product name or part number (e.g. 'Lenovo ThinkPad', 'Cisco Switch', 'FG-60F')"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
             properties: {
                 max_call_duration: 1800, // 30 Minutes
                 enable_recording: true,
                 participant_absent_timeout: 60,
                 participant_left_timeout: 60,
+                tool_choice: "auto", // Ensure tools are active
                 ...(properties || {})
             },
             audio_only: audio_only,

@@ -81,7 +81,9 @@ export const SearchAssist: React.FC<{ isOpen: boolean; onClose: () => void; onOp
 
             // Tavus V2 tool_call event
             if (data?.event === 'tool_call' && data?.name === 'search_assist') {
-                const queryText = data.arguments?.query_text;
+                // Support both 'query_text' (persona) and 'query' (AI guess)
+                const queryText = data.arguments?.query_text || data.arguments?.query;
+
                 console.log('[SearchAssist] 🎯 AI Triggered Search:', queryText);
                 if (queryText) {
                     onOpen();
