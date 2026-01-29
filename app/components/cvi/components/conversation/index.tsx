@@ -8,7 +8,8 @@ import {
     useLocalSessionId,
     useMeetingState,
     useScreenVideoTrack,
-    useVideoTrack
+    useVideoTrack,
+    useDaily
 } from "@daily-co/daily-react";
 import { MicSelectBtn, CameraSelectBtn, ScreenShareButton } from '../device-select'
 import { useLocalScreenshare } from "../../hooks/use-local-screenshare";
@@ -106,6 +107,35 @@ export const Conversation = React.memo(({ onLeave, conversationUrl }: Conversati
         }
     }, [meetingState, onLeave]);
 
+    const daily = useDaily();
+
+    useEffect(() => {
+        if (!daily) return;
+
+        const handleAppMessage = (event: any) => {
+            console.log('[Conversation] 🔔 App Message Received:', event);
+            const data = event?.data;
+            if (data?.event === 'tool_call' && data?.name === 'search_assist') {
+                const query = data.arguments?.query_text || data.arguments?.query;
+                console.log('[Conversation] 🎯 Search Tool Detected:', query);
+
+                // Nuclear Trigger: Force Open Panel
+                if ((window as any).openSearchPanel) {
+                    (window as any).openSearchPanel();
+                }
+
+                // Pass query to component
+                if (query && (window as any).amySearchAssist) {
+                    (window as any).amySearchAssist(query);
+                }
+            }
+        };
+
+        daily.on('app-message', handleAppMessage);
+        return () => {
+            daily.off('app-message', handleAppMessage);
+        };
+    }, [daily]);
 
     useEffect(() => {
         joinCall({ url: conversationUrl });
