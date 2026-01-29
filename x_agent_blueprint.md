@@ -26,9 +26,11 @@ This document serves as the **Master PRD and Standard Operating Procedure** for 
 ### 3. API Infrastructure
 **Copy Routes**:
 - `app/api/auth/route.ts` -> (Simple Token Gate)
-- `app/api/tavus/route.ts` -> (Conversation Initializer)
-- `app/api/tavus/end/route.ts` -> (Session Cleanup - **CRITICAL SOP**)
-- `app/api/contact/route.ts` -> (Lead Gen Form)
+- `app/api/tavus/route.ts` -> (Conversation Initializer - **CRITICAL**: Use Dynamic Webhook detection)
+- `app/api/tavus/end/route.ts` -> (Session Cleanup)
+- `app/api/webhook/route.ts` -> (Logic Hub: AI Analysis + Resend + Sheets)
+- `app/api/contact/route.ts` -> (Manual Lead Gen Form)
+- `app/api/debug/route.ts` -> (Diagnostic Trace Endpoint)
 
 ### 4. Logic Utilities
 - `lib/config.ts` -> Centralized ENV configuration.
@@ -62,7 +64,18 @@ This document serves as the **Master PRD and Standard Operating Procedure** for 
 - **Action**:
   - Update the "Header" (Logo/Title).
   - Update the "Hero Section" (Agent Name, Role Description).
+  - **Scaling Rule**: Use a `75vh` height cap on the video container and `max-w-4xl` to ensure 1:1 professional fit on 100% zoom browsers.
+  - **Header Compression**: Reduce header `py` and top padding during active sessions to 90px to avoid bottom cutoff.
   - **Important**: Replace `public/[agent].png` with new headshot.
+
+### 5. Branding Guardrails (CRITICAL Audit)
+**Goal**: Zero residual branding from previous agents.
+- **Audit Points**:
+  - `lib/openai-service.ts`: System Prompt role and company name.
+  - `app/api/webhook/route.ts`: Email signatures, subject lines, and sender names.
+  - `app/api/contact/route.ts`: Email templates.
+  - `lib/amy-prompt.ts`: The actual AI behavioral persona.
+  - `app/layout.tsx`: Favicon and metadata titles.
 
 ## ✨ Phase 2.5: Formatting & Polish (End of Prototyping)
 *Complete this step after the agent is functional but before final deployment.*
@@ -124,17 +137,29 @@ This document serves as the **Master PRD and Standard Operating Procedure** for 
 
 ## ⚠️ Troubleshooting & Integration Notes
 
-### 1. Cartesia TTS Integration (CRITICAL)
-- **Issue**: Sending `layers: { tts: ... }` in the Tavus API payload causes an "Unknown field" error (`{'layers': ['Unknown field.']}`).
-- **Fix**: Do **NOT** send the `layers` object in the API call.
-- **Bolt On 3**: **Email & Logic Templating**
-  - **Purpose**: Defines who the agent is in emails and what data they extract.
-  - **Files**: 
-    - `lib/openai-service.ts`: Update `systemPrompt` (Role, Extraction Fields) and `LeadData` interface.
-    - `app/api/webhook/route.ts`: Update Email HTML (Sender Name, Signature, Subject) and internal alert content.
-    - `lib/google-sheets.ts`: Map new extracted fields to existing sheet columns.
-  - **Action**: Search for "SDR" or "Intake" and replace with new persona domain (e.g. "Recruiter", "Support").
-- **Solution**: Configure the Voice ID and TTS provider directly in the Tavus Persona Dashboard. The API should only pass `persona_id`, `conversational_context`, and other standard fields.
+### 1. Hardcoded Webhook Branding (CRITICAL)
+- **Issue**: Background emails still show old branding despite UI updates.
+- **Root Cause**: The Tavus Dashboard global webhook is used as a fallback.
+- **Fix**: **Dynamic Webhook Injection**. In `app/api/tavus/route.ts`, calculate the URL based on the current host and pass it explicitly in the `callback_url` property.
+```typescript
+const host = request.headers.get('host');
+const protocol = host?.includes('localhost') ? 'http' : 'https';
+const callbackUrl = `${protocol}://${host}/api/webhook`;
+```
+
+### 2. Diagnostic Logging (Harden the Pipe)
+- **Problem**: Silent email failures or incorrect branding.
+- **Solution**: Tracing. Log the full `LeadData` object, the calculated `callbackUrl`, and the exact `resend.emails.send` parameters (Subject, From, To) to the Vercel console.
+
+### 3. Cartesia TTS Integration
+- **Issue**: Sending `layers: { tts: ... }` in the Tavus API payload causes an "Unknown field" error.
+- **Fix**: Configure the Voice ID directly in the Tavus Persona Dashboard. The API should only pass `persona_id` and context.
+
+### 4. Video Cutoff & Scrolling
+- **Solution**: Aggressive Viewport Scaling.
+  - Set `.container` max-height to `75vh` in CSS.
+  - Reduce main container `pt` to `90px` during active sessions.
+  - Shift header elements up with `py-2` and shrink logo to `h-16`.
 
 ---
 
