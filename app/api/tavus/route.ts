@@ -80,8 +80,29 @@ export async function POST(request: Request) {
             persona_id: serverPersonaId,
             custom_greeting: cleanedGreeting,
             conversation_name: conversation_name || "Insight Discovery Session",
-            conversational_context: AMY_SYSTEM_PROMPT,
             document_tags: finalTags,
+            llm_config: {
+                conversational_context: AMY_SYSTEM_PROMPT,
+                tools: [
+                    {
+                        type: "function",
+                        function: {
+                            name: "search_assist",
+                            description: "Searches for part numbers or product keywords and opens the product viewer side panel for the user.",
+                            parameters: {
+                                type: "object",
+                                properties: {
+                                    query_text: {
+                                        type: "string",
+                                        description: "The Part Number (PN) or keywords to search for."
+                                    }
+                                },
+                                required: ["query_text"]
+                            }
+                        }
+                    }
+                ]
+            },
             properties: {
                 max_call_duration: 1800, // 30 Minutes
                 enable_recording: true,
@@ -92,22 +113,6 @@ export async function POST(request: Request) {
             audio_only: audio_only,
             memory_id: memory_id,
             callback_url: callbackUrl,
-            tools: [
-                {
-                    name: "searchAssist",
-                    description: "Searches for part numbers or product keywords and opens the product viewer side panel for the user.",
-                    parameters: {
-                        type: "object",
-                        properties: {
-                            queryText: {
-                                type: "string",
-                                description: "The Part Number (PN) or keywords to search for."
-                            }
-                        },
-                        required: ["queryText"]
-                    }
-                }
-            ]
         };
 
         console.log('[Tavus API] 📦 Final Request Body:', JSON.stringify(body, null, 2));

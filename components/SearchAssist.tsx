@@ -78,8 +78,8 @@ export const SearchAssist: React.FC<{ isOpen: boolean; onClose: () => void; onOp
         onAppMessage: (event) => {
             const data = (event as any).data;
             // Tavus V2 tool_call event
-            if (data.event === 'tool_call' && data.name === 'searchAssist') {
-                const queryText = data.arguments?.queryText;
+            if (data.event === 'tool_call' && data.name === 'search_assist') {
+                const queryText = data.arguments?.query_text;
                 if (queryText) {
                     onOpen();
                     setQuery(queryText);
