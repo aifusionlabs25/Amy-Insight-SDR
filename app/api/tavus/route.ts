@@ -92,6 +92,22 @@ export async function POST(request: Request) {
             audio_only: audio_only,
             memory_id: memory_id,
             callback_url: callbackUrl,
+            tools: [
+                {
+                    name: "searchAssist",
+                    description: "Searches for part numbers or product keywords and opens the product viewer side panel for the user.",
+                    parameters: {
+                        type: "object",
+                        properties: {
+                            queryText: {
+                                type: "string",
+                                description: "The Part Number (PN) or keywords to search for."
+                            }
+                        },
+                        required: ["queryText"]
+                    }
+                }
+            ]
         };
 
         console.log('[Tavus API] 📦 Final Request Body:', JSON.stringify(body, null, 2));
