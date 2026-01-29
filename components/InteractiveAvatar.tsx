@@ -156,7 +156,7 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                         <div className="flex items-center gap-3 z-[1000] relative">
                             {/* Image Logo */}
                             <a href="https://www.insight.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-16 w-auto object-contain" />
+                                <img src="/insight-logo-final.png" alt="Insight Enterprises" className="h-20 w-auto object-contain" />
                             </a>
                         </div>
 
@@ -198,11 +198,11 @@ export default function InteractiveAvatar({ userName, userEmail }: InteractiveAv
                                     <div className="flex flex-col items-center">
                                         <div className="relative mb-8 gd-float">
                                             <div className="absolute inset-0 rounded-full bg-[rgb(var(--gd-gold))]/20 blur-2xl" />
-                                            <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30">
+                                            <div className="rounded-full bg-gradient-to-tr from-[rgb(var(--gd-blue))]/30 to-[rgb(var(--gd-gold))]/30 p-2 border border-[rgb(var(--gd-gold))]/30 overflow-hidden">
                                                 <img
                                                     src="/amy.png"
                                                     alt="Amy Headshot"
-                                                    className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover opacity-95"
+                                                    className="h-44 w-44 md:h-52 md:w-52 rounded-full object-cover object-top scale-[1.1] opacity-95"
                                                 />
                                             </div>
                                         </div>
